@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'feature/splash/presentation/splash_screen.dart';
+
 class EdulearnApp extends StatelessWidget {
   const EdulearnApp({super.key});
 
@@ -7,8 +9,8 @@ class EdulearnApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Edulearn',
-      // theme:
-      home: Scaffold(),
+      debugShowCheckedModeBanner: false,
+      home:const SplashScreen(),
     );
   }
 }
