@@ -1,3 +1,4 @@
+import 'package:edulearn_mobile/core/router/app_router.dart';
 import 'package:edulearn_mobile/core/theme/app_colors.dart';
 import 'package:edulearn_mobile/core/theme/app_images.dart';
 import 'package:edulearn_mobile/core/theme/app_style.dart';
@@ -20,6 +21,14 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     init();
+    //check if device see onborading skip it,
+    //check user if login or not.
+
+    Future.delayed(Duration(milliseconds: 4000), () {
+      if (mounted) {
+        Navigator.pushNamed(context, RouterName.onbording);
+      }
+    });
   }
 
   void init() async {
@@ -31,9 +40,9 @@ class _SplashScreenState extends State<SplashScreen>
 
     _animationLogo = CurvedAnimation(parent: _controller, curve: Curves.linear);
     _animationText = CurvedAnimation(parent: _controller, curve: Curves.linear);
-    _textAnimation =Tween<Offset>(
+    _textAnimation = Tween<Offset>(
       begin: const Offset(0, 2),
-    end: Offset.zero,
+      end: Offset.zero,
     ).animate(_animationText);
     _controller.forward();
   }
@@ -80,7 +89,7 @@ class _SplashScreenState extends State<SplashScreen>
                 ),
                 const SizedBox(height: 22),
                 SlideTransition(
-                  position:_textAnimation ,
+                  position: _textAnimation,
                   child: const Text('EduLearn', style: AppStyle.display),
                 ),
 
