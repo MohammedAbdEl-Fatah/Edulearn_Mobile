@@ -2,7 +2,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageSharedPreferences {
   StorageSharedPreferences._();
-  static final StorageSharedPreferences instance = StorageSharedPreferences._();
+  static final StorageSharedPreferences _instance =
+      StorageSharedPreferences._();
+  static StorageSharedPreferences storage = StorageSharedPreferences._instance;
   late SharedPreferences _sharedPreferences;
 
   Future<void> init() async {

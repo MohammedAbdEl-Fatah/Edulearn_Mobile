@@ -1,0 +1,1 @@
+enum KeySharedPreferences { isWatch, isLogin }
