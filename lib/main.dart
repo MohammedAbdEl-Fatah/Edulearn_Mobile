@@ -8,6 +8,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //setup blocObserver
   Bloc.observer = AppBlocObserver();
-  await StorageSharedPreferences.instance.init();
+  await StorageSharedPreferences.storage.init();
   runApp(const EdulearnApp());
 }
