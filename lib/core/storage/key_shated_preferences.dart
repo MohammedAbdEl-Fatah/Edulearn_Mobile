@@ -1,0 +1,1 @@
+enum KeyShatedPreferences { isWatch, isLogin }
