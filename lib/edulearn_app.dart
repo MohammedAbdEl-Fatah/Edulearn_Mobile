@@ -1,4 +1,5 @@
 import 'package:edulearn_mobile/core/router/app_router.dart';
+import 'package:edulearn_mobile/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class EdulearnApp extends StatelessWidget {
@@ -10,6 +11,10 @@ class EdulearnApp extends StatelessWidget {
       title: 'Edulearn',
       debugShowCheckedModeBanner: false,
       initialRoute: RouterName.splashScreen,
+      theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.backGroundWhite,
+        appBarTheme: AppBarTheme(backgroundColor: AppColors.backGroundWhite),
+      ),
       onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
     );
   }
