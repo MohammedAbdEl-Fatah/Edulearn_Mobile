@@ -15,8 +15,8 @@ class AppColors {
   static const Color worningLight = Color(0xFFFEF3C7);
   //error
   static const Color errorDefault = Color(0xFFEF4444);
-  static const Color errorDark = Color(0xFFFEE2E2);
-  static const Color errorLight = Color(0xFFB91C1C);
+  static const Color errorLight = Color(0xFFFEE2E2);
+  static const Color errorDark = Color(0xFFB91C1C);
   //text
   static const Color textGray = Color(0xFF6B7280);
   static const Color textDark = Color(0xFF111827);
