@@ -1,3 +1,5 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 enum Env { dev, prod }
 
 class AppConfig {
@@ -14,15 +16,15 @@ class AppConfig {
 
   bool get isProduction => env == Env.prod;
 
-  static const AppConfig dev = AppConfig._(
+  static AppConfig dev = AppConfig._(
     env: Env.dev,
-    baseUrl: "", //todo write the base url for the dev environment
+    baseUrl: dotenv.get('BASEURL'),
     enableLogs: true,
   );
 
-  static const AppConfig prod = AppConfig._(
+  static AppConfig prod = AppConfig._(
     env: Env.prod,
-    baseUrl: "", //todo write the base url for the prod environment
+    baseUrl: dotenv.get('BASEURL'),
     enableLogs: false,
   );
 
