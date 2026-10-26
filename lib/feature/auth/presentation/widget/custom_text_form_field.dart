@@ -36,7 +36,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           controller: widget._controller,
           validator: widget.validator,
           cursorColor: AppColors.primaryDefault,
-          obscureText: isVisibility,
+          obscureText: widget.isObscure && isVisibility,
           decoration: InputDecoration(
             suffixIcon: widget.isObscure
                 ? IconButton(
@@ -50,10 +50,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                       color: AppColors.textMuted,
                     ),
                   )
-                : SizedBox.shrink(),
+                : null,
 
             hintText: widget.hintText,
             hintStyle: AppStyle.caption.copyWith(color: AppColors.textMuted),
+            filled: true,
             fillColor: AppColors.backGroundWhite,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.border),
