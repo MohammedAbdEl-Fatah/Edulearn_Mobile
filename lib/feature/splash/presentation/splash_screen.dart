@@ -4,6 +4,9 @@ import 'package:edulearn_mobile/core/theme/app_images.dart';
 import 'package:edulearn_mobile/core/theme/app_style.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/storage/key_shared_preferences.dart';
+import '../../../core/storage/storage_shared_preferences.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -26,7 +29,15 @@ class _SplashScreenState extends State<SplashScreen>
 
     Future.delayed(Duration(milliseconds: 4000), () {
       if (mounted) {
-        Navigator.pushNamed(context, RouterName.onbording);
+        //check is watch onbording or not
+        if (StorageSharedPreferences.storage.get<bool>(
+              KeySharedPreferences.isWatch.name,
+            ) ??
+            false) {
+          Navigator.pushNamed(context, RouterName.login);
+        } else {
+          Navigator.pushNamed(context, RouterName.onbording);
+        }
       }
     });
   }
