@@ -3,6 +3,8 @@ import 'package:edulearn_mobile/feature/auth/presentation/view/login_screen.dart
 import 'package:edulearn_mobile/feature/onbording/presentation/view/onbording_screen.dart';
 import 'package:edulearn_mobile/feature/splash/presentation/splash_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../../feature/auth/presentation/view/select_role_register.dart';
 part 'router_name.dart';
 
 class AppRouter {
@@ -19,6 +21,11 @@ class AppRouter {
       case RouterName.login:
         return MaterialPageRoute(
           builder: (_) => const LoginScreen(),
+          settings: setting,
+        );
+      case RouterName.selectRoleRegister:
+        return MaterialPageRoute(
+          builder: (_) => const SelectRoleRegister(),
           settings: setting,
         );
       default:

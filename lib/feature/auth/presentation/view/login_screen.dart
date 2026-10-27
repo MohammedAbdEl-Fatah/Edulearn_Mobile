@@ -179,7 +179,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 Align(
                   alignment: .center,
                   child: CustomTextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(RouterName.selectRoleRegister);
+                    },
                     title: "New to EduLearn? Create an account",
                   ),
                 ),
