@@ -6,6 +6,7 @@ import 'package:edulearn_mobile/feature/onbording/presentation/cubit/onbording_c
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/widgets/text_button.dart';
 import '../widget/custom_text_widget.dart';
 import '../widget/dot_widget.dart';
 
@@ -27,17 +28,24 @@ class OnbordingScreen extends StatelessWidget {
                 BlocBuilder<OnbordingCubit, OnbordingState>(
                   builder: (context, state) {
                     return switch (state) {
-                      InitOnbordignState() => Button(
-                        title: "Skip",
-                        onPressed: () {
-                          context.read<OnbordingCubit>().skip();
-                        },
+                      InitOnbordignState() => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CustomTextButton(
+                          onPressed: () {
+                            context.read<OnbordingCubit>().skip();
+                            Navigator.of(context).pushNamed(RouterName.login);
+                          },
+                          title: "Skip",
+                        ),
                       ),
-                      FinalOnbordignState() => Button(
-                        title: "Login",
-                        onPressed: () {
-                          context.read<OnbordingCubit>().skip();
-                        },
+                      FinalOnbordignState() => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CustomTextButton(
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(RouterName.login);
+                          },
+                          title: "Login",
+                        ),
                       ),
                       EndOnbordignState() => const SizedBox.shrink(),
                     };
