@@ -3,6 +3,8 @@ import 'package:edulearn_mobile/core/theme/app_style.dart';
 import 'package:edulearn_mobile/core/theme/extension.dart';
 import 'package:flutter/material.dart';
 
+import 'animted_radio_indicator.dart';
+
 class SelectRoleContainer extends StatelessWidget {
   final String title;
   final String description;
@@ -82,29 +84,6 @@ class SelectRoleContainer extends StatelessWidget {
               Text(description, style: AppStyle.small),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class AnimatedRadioIndicator extends StatelessWidget {
-  final bool isSelected;
-
-  const AnimatedRadioIndicator({super.key, required this.isSelected});
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 250),
-      curve: Curves.easeInOut,
-      width: 24,
-      height: 24,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: isSelected ? AppColors.primaryDefault : Colors.grey.shade300,
-          width: isSelected ? 7 : 2,
         ),
       ),
     );
