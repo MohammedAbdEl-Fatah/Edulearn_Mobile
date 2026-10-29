@@ -22,12 +22,12 @@ class _SelectRoleRegisterState extends State<SelectRoleRegister> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: SizedBox.shrink(),
+        leading: const SizedBox.shrink(),
         leadingWidth: MediaQuery.of(context).size.width * 0.6,
-        title: Logo(),
+        title: const Logo(),
       ),
       body: Padding(
-        padding: .symmetric(horizontal: 24, vertical: 22),
+        padding: const .symmetric(horizontal: 24, vertical: 22),
         child: Column(
           crossAxisAlignment: .start,
           children: [
@@ -38,7 +38,7 @@ class _SelectRoleRegisterState extends State<SelectRoleRegister> {
               ),
             ),
             SizedBox(height: context.h(10)),
-            Text("How will you join us?", style: AppStyle.h1),
+            const Text("How will you join us?", style: AppStyle.h1),
             SizedBox(height: context.h(10)),
             Text(
               "Choose your role so we can tailor your EduLearn experience.",
@@ -76,7 +76,7 @@ class _SelectRoleRegisterState extends State<SelectRoleRegister> {
               },
             ),
             // button
-            Spacer(),
+            const Spacer(),
             Button(
               title: "Continue as Student",
               onPressed: () {

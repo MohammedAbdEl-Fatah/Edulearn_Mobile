@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen>
     //check if device see onborading skip it,
     //check user if login or not.
 
-    Future.delayed(Duration(milliseconds: 4000), () {
+    Future.delayed(const Duration(milliseconds: 4000), () {
       if (mounted) {
         //check is watch onbording or not
         if (StorageSharedPreferences.storage.get<bool>(
@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen>
       begin: const Offset(0, 2),
       end: Offset.zero,
     ).animate(_animationText);
-    _controller.forward();
+    await _controller.forward();
   }
 
   @override
@@ -117,7 +117,7 @@ class _SplashScreenState extends State<SplashScreen>
     return Container(
       width: diameter,
       height: diameter,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         shape: BoxShape.circle,
         color: AppColors.primaryLight,
       ),

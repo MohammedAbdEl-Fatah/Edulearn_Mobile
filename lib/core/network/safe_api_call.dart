@@ -9,6 +9,6 @@ Future<Result<T>> safeApiCall<T>(Future<T> Function() call) async {
   } on DioException catch (e) {
     return Failed(mapDioException(e));
   } catch (_) {
-    return Failed(UnknownFailure());
+    return const Failed(UnknownFailure());
   }
 }

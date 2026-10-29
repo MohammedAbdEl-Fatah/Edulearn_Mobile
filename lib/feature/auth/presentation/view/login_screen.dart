@@ -45,9 +45,9 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          leading: SizedBox.shrink(),
+          leading: const SizedBox.shrink(),
           leadingWidth: MediaQuery.of(context).size.width * 0.6,
-          title: Logo(),
+          title: const Logo(),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: context.h(10)),
-                Text("Welcome back", style: AppStyle.h1),
+                const Text("Welcome back", style: AppStyle.h1),
                 SizedBox(height: context.h(10)),
                 Text(
                   "Log in and pick up where your curiosity left off.",
@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   listener: (context, state) {
                     if (state is SuccessState) {
                       // 1.5sec waitting
-                      Future.delayed(Duration(milliseconds: 1500), () {
+                      Future.delayed(const Duration(milliseconds: 1500), () {
                         if (context.mounted) {
                           Navigator.pushNamedAndRemoveUntil(
                             context,
@@ -157,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         SizedBox(height: context.h(103)),
                         state is LoadingState
-                            ? CircularProgressIndicator()
+                            ? const CircularProgressIndicator()
                             : Button(
                                 onPressed: () {
                                   final params = LoginParams(

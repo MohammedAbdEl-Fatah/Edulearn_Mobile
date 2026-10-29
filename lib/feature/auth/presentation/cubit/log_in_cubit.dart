@@ -6,11 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'log_in_state.dart';
 
 class LogInCubit extends Cubit<LogInState> {
-  LogInCubit(this._logInUseCase) : super(InitState());
+  LogInCubit(this._logInUseCase) : super(const InitState());
   final LogInUseCase _logInUseCase;
 
   Future<void> login(LoginParams params) async {
-    emit(LoadingState());
+    emit(const LoadingState());
     final result = await _logInUseCase.call(model: params);
     result.fold(
       (failure) => emit(ErrorState(message: failure.message)),

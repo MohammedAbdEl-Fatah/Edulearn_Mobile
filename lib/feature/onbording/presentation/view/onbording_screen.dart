@@ -21,9 +21,9 @@ class OnbordingScreen extends StatelessWidget {
         builder: (context) {
           return Scaffold(
             appBar: AppBar(
-              leading: SizedBox.shrink(),
+              leading: const SizedBox.shrink(),
               leadingWidth: 0,
-              title: Logo(),
+              title: const Logo(),
               actions: [
                 BlocBuilder<OnbordingCubit, OnbordingState>(
                   builder: (context, state) {

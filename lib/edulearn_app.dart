@@ -13,7 +13,7 @@ class EdulearnApp extends StatelessWidget {
       initialRoute: RouterName.splashScreen,
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.backGroundWhite,
-        appBarTheme: AppBarTheme(backgroundColor: AppColors.backGroundWhite),
+        appBarTheme: const AppBarTheme(backgroundColor: AppColors.backGroundWhite),
       ),
       onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
     );

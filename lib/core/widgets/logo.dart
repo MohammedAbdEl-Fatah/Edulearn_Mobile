@@ -11,7 +11,7 @@ class Logo extends StatelessWidget {
       spacing: 9,
       children: [
         Image.asset(AppImages.kLogo),
-        Text("EduLearn", style: AppStyle.h3Bold),
+        const Text("EduLearn", style: AppStyle.h3Bold),
       ],
     );
   }
