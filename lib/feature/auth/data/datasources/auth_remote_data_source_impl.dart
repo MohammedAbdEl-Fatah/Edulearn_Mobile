@@ -27,14 +27,26 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<Result<RegisterStudentResponseModel>> signUp({
-    required RegisterStudentRequestModel request,
+  Future<Result<RegisterResponseModel>> signUpStudent({
+    required RegisterRequestModel request,
   }) async {
-    return _apiService.post<RegisterStudentResponseModel>(
+    return _apiService.post<RegisterResponseModel>(
       path: AuthEndPiontApi.signUpStudent,
       data: request.toJson(),
       parser: (json) =>
-          RegisterStudentResponseModel.fromJson(json as Map<String, dynamic>),
+          RegisterResponseModel.fromJson(json as Map<String, dynamic>),
+    );
+  }
+
+  @override
+  Future<Result<RegisterResponseModel>> signUpTeacher({
+    required RegisterRequestModel request,
+  }) {
+    return _apiService.post<RegisterResponseModel>(
+      path: AuthEndPiontApi.signUpTeacher,
+      data: request.toJson(),
+      parser: (json) =>
+          RegisterResponseModel.fromJson(json as Map<String, dynamic>),
     );
   }
 }

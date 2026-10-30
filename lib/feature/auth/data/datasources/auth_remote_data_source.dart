@@ -9,7 +9,10 @@ abstract class AuthRemoteDataSource {
   Future<Result<LogInResponseModel>> login({
     required LogInRequestModel request,
   });
-  Future<Result<RegisterStudentResponseModel>> signUp({
-    required RegisterStudentRequestModel request,
+  Future<Result<RegisterResponseModel>> signUpStudent({
+    required RegisterRequestModel request,
+  });
+  Future<Result<RegisterResponseModel>> signUpTeacher({
+    required RegisterRequestModel request,
   });
 }

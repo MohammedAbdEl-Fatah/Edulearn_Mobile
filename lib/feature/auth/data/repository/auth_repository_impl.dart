@@ -6,8 +6,8 @@ import 'package:edulearn_mobile/feature/auth/domain/entity/auth_token_entity.dar
 
 import 'package:edulearn_mobile/feature/auth/domain/params/log_in_params.dart';
 
-import '../../domain/entity/register_student_entity.dart';
-import '../../domain/params/register_student.dart';
+import '../../domain/entity/register_entity.dart';
+import '../../domain/params/register_params.dart';
 import '../../domain/repository/auth_repository.dart';
 import '../model/request/log_in_request_model.dart';
 
@@ -56,10 +56,10 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Result<RegisterStudentEntity>> registerStudent({
-    required RegisterStudentParams registerStudentParams,
+  Future<Result<RegisterEntity>> registerStudent({
+    required RegisterParams registerStudentParams,
   }) async {
-    final RegisterStudentRequestModel req = RegisterStudentRequestModel(
+    final RegisterRequestModel req = RegisterRequestModel(
       firstName: registerStudentParams.firstName,
       lastName: registerStudentParams.lastName,
       email: registerStudentParams.email,
@@ -68,17 +68,31 @@ class AuthRepositoryImpl implements AuthRepository {
       dob: registerStudentParams.dob.toString(),
       phone: registerStudentParams.phone,
     );
-    final result = await _authRemoteDataSource.signUp(request: req);
+    final result = await _authRemoteDataSource.signUpStudent(request: req);
     return result.fold(
-      (failure) => Failed<RegisterStudentEntity>(failure),
-      (success) => Success<RegisterStudentEntity>(success.registerStudentModel),
+      (failure) => Failed<RegisterEntity>(failure),
+      (success) => Success<RegisterEntity>(success.registerModel),
     );
   }
 
   @override
-  Future<void> registerTeacher(Map<String, dynamic> model) {
-    // TODO: implement registerTeacher
-    throw UnimplementedError();
+  Future<Result<RegisterEntity>> registerTeacher({
+    required RegisterParams registerTeacherParams,
+  }) async {
+    final RegisterRequestModel req = RegisterRequestModel(
+      firstName: registerTeacherParams.firstName,
+      lastName: registerTeacherParams.lastName,
+      email: registerTeacherParams.email,
+      password: registerTeacherParams.password,
+      confirmPassword: registerTeacherParams.confirmPassword,
+      dob: registerTeacherParams.dob.toString(),
+      phone: registerTeacherParams.phone,
+    );
+    final result = await _authRemoteDataSource.signUpTeacher(request: req);
+    return result.fold(
+      (failure) => Failed<RegisterEntity>(failure),
+      (success) => Success<RegisterEntity>(success.registerModel),
+    );
   }
 
   @override

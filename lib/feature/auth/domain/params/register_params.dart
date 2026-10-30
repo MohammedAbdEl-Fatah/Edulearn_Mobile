@@ -1,4 +1,4 @@
-class RegisterStudentParams {
+class RegisterParams {
   final String firstName;
   final String lastName;
   final String email;
@@ -7,7 +7,7 @@ class RegisterStudentParams {
   final String phone;
   final DateTime dob;
 
-  RegisterStudentParams({
+  RegisterParams({
     required this.firstName,
     required this.lastName,
     required this.email,

@@ -1,7 +1,7 @@
-import 'package:edulearn_mobile/feature/auth/domain/entity/register_student_entity.dart';
+import 'package:edulearn_mobile/feature/auth/domain/entity/register_entity.dart';
 
-class RegisterStudentModel extends RegisterStudentEntity {
-  RegisterStudentModel({
+class RegisterModel extends RegisterEntity {
+  RegisterModel({
     required super.id,
     required super.name,
     required super.email,
@@ -11,8 +11,8 @@ class RegisterStudentModel extends RegisterStudentEntity {
     required super.isVerified,
     required super.createdAt,
   });
-  factory RegisterStudentModel.fromJson(Map<String, dynamic> json) {
-    return RegisterStudentModel(
+  factory RegisterModel.fromJson(Map<String, dynamic> json) {
+    return RegisterModel(
       id: json['id'] as String,
       name: json['name'] as String,
       email: json['email'] as String,

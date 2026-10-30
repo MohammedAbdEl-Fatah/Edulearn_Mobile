@@ -1,4 +1,4 @@
-class RegisterStudentRequestModel {
+class RegisterRequestModel {
   final String firstName;
   final String lastName;
   final String email;
@@ -7,7 +7,7 @@ class RegisterStudentRequestModel {
   final String dob;
   final String phone;
 
-  RegisterStudentRequestModel({
+  RegisterRequestModel({
     required this.firstName,
     required this.lastName,
     required this.email,

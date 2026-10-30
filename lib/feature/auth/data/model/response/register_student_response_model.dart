@@ -1,20 +1,20 @@
 import 'package:edulearn_mobile/feature/auth/data/model/register_student_model.dart';
 
-class RegisterStudentResponseModel {
+class RegisterResponseModel {
   final bool success;
   final String message;
-  final RegisterStudentModel registerStudentModel;
+  final RegisterModel registerModel;
 
-  RegisterStudentResponseModel({
+  RegisterResponseModel({
     required this.success,
     required this.message,
-    required this.registerStudentModel,
+    required this.registerModel,
   });
-  factory RegisterStudentResponseModel.fromJson(Map<String, dynamic> json) {
-    return RegisterStudentResponseModel(
+  factory RegisterResponseModel.fromJson(Map<String, dynamic> json) {
+    return RegisterResponseModel(
       success: json['success'] as bool,
       message: json['message'],
-      registerStudentModel: RegisterStudentModel.fromJson(json['data']),
+      registerModel: RegisterModel.fromJson(json['data']),
     );
   }
 }

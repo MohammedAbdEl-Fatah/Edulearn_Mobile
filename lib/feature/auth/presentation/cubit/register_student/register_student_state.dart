@@ -7,7 +7,7 @@ class InitialRegisterStudentState extends RegisterStudentState {}
 class LoadingRegisterStudentState extends RegisterStudentState {}
 
 class SuccessRegisterStudentState extends RegisterStudentState {
-  final RegisterStudentEntity registerStudent;
+  final RegisterEntity registerStudent;
   SuccessRegisterStudentState({required this.registerStudent});
 }
 

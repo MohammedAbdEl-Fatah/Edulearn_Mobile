@@ -1,5 +1,5 @@
-import 'package:edulearn_mobile/feature/auth/domain/entity/register_student_entity.dart';
-import 'package:edulearn_mobile/feature/auth/domain/params/register_student.dart';
+import 'package:edulearn_mobile/feature/auth/domain/entity/register_entity.dart';
+import 'package:edulearn_mobile/feature/auth/domain/params/register_params.dart';
 import 'package:edulearn_mobile/feature/auth/domain/repository/auth_repository.dart';
 
 import '../../../../core/errors/result.dart';
@@ -7,9 +7,7 @@ import '../../../../core/errors/result.dart';
 class RegisterStudentUseCase {
   final AuthRepository repository;
   RegisterStudentUseCase({required this.repository});
-  Future<Result<RegisterStudentEntity>> call({
-    required RegisterStudentParams model,
-  }) {
+  Future<Result<RegisterEntity>> call({required RegisterParams model}) {
     return repository.registerStudent(registerStudentParams: model);
   }
 }

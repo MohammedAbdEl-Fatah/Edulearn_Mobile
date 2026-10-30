@@ -2,7 +2,7 @@ import 'package:edulearn_mobile/core/di/injection_container.dart';
 import 'package:edulearn_mobile/core/theme/app_colors.dart';
 import 'package:edulearn_mobile/core/theme/app_style.dart';
 import 'package:edulearn_mobile/core/theme/extension.dart';
-import 'package:edulearn_mobile/feature/auth/domain/params/register_student.dart';
+import 'package:edulearn_mobile/feature/auth/domain/params/register_params.dart';
 import 'package:edulearn_mobile/feature/auth/presentation/cubit/register_student/register_student_cubit.dart';
 import 'package:edulearn_mobile/feature/auth/presentation/widget/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +43,7 @@ class _StudentRegisterState extends State<StudentRegister> {
   }
 
   void _registerStudent() {
-    final reqTap = RegisterStudentParams(
+    final reqTap = RegisterParams(
       firstName: _controllerFirstName.text,
       lastName: _controllerLastName.text,
       email: _controllerEmail.text,
