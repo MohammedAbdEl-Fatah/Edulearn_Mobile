@@ -1,10 +1,13 @@
 import 'package:edulearn_mobile/core/errors/result.dart';
 import 'package:edulearn_mobile/feature/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:edulearn_mobile/feature/auth/data/model/request/register_student_request_model.dart';
 
 import 'package:edulearn_mobile/feature/auth/domain/entity/auth_token_entity.dart';
 
 import 'package:edulearn_mobile/feature/auth/domain/params/log_in_params.dart';
 
+import '../../domain/entity/register_student_entity.dart';
+import '../../domain/params/register_student.dart';
 import '../../domain/repository/auth_repository.dart';
 import '../model/request/log_in_request_model.dart';
 
@@ -53,12 +56,23 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<void> registerStudent({
-    required String email,
-    required String password,
-  }) {
-    // TODO: implement registerStudent
-    throw UnimplementedError();
+  Future<Result<RegisterStudentEntity>> registerStudent({
+    required RegisterStudentParams registerStudentParams,
+  }) async {
+    final RegisterStudentRequestModel req = RegisterStudentRequestModel(
+      firstName: registerStudentParams.firstName,
+      lastName: registerStudentParams.lastName,
+      email: registerStudentParams.email,
+      password: registerStudentParams.password,
+      confirmPassword: registerStudentParams.confirmPassword,
+      dob: registerStudentParams.dob.toString(),
+      phone: registerStudentParams.phone,
+    );
+    final result = await _authRemoteDataSource.signUp(request: req);
+    return result.fold(
+      (failure) => Failed<RegisterStudentEntity>(failure),
+      (success) => Success<RegisterStudentEntity>(success.registerStudentModel),
+    );
   }
 
   @override
