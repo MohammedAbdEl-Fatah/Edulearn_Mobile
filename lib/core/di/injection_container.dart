@@ -5,7 +5,7 @@ import '../../feature/auth/data/datasources/auth_remote_data_source_impl.dart';
 import '../../feature/auth/data/repository/auth_repository_impl.dart';
 import '../../feature/auth/domain/repository/auth_repository.dart';
 import '../../feature/auth/domain/usecases/log_in_use_case.dart';
-import '../../feature/auth/presentation/cubit/log_in_cubit.dart';
+import '../../feature/auth/presentation/cubit/log_in/log_in_cubit.dart';
 import '../config/app_config.dart';
 import '../network/api_service.dart';
 import '../network/dio_client.dart';

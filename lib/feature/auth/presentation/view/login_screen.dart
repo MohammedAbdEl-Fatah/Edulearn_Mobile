@@ -8,7 +8,7 @@ import 'package:edulearn_mobile/core/theme/extension.dart';
 import 'package:edulearn_mobile/core/widgets/logo.dart';
 import 'package:edulearn_mobile/feature/auth/data/datasources/auth_remote_data_source_impl.dart';
 import 'package:edulearn_mobile/feature/auth/data/repository/auth_repository_impl.dart';
-import 'package:edulearn_mobile/feature/auth/presentation/cubit/log_in_cubit.dart';
+import 'package:edulearn_mobile/feature/auth/presentation/cubit/log_in/log_in_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
