@@ -1,21 +1,16 @@
 import 'package:edulearn_mobile/core/router/app_router.dart';
 import 'package:edulearn_mobile/core/theme/app_colors.dart';
-import 'package:edulearn_mobile/core/config/app_config.dart';
-import 'package:edulearn_mobile/core/network/api_service.dart';
-import 'package:edulearn_mobile/core/network/dio_client.dart';
 import 'package:edulearn_mobile/core/theme/app_style.dart';
 import 'package:edulearn_mobile/core/theme/extension.dart';
 import 'package:edulearn_mobile/core/widgets/logo.dart';
-import 'package:edulearn_mobile/feature/auth/data/datasources/auth_remote_data_source_impl.dart';
-import 'package:edulearn_mobile/feature/auth/data/repository/auth_repository_impl.dart';
 import 'package:edulearn_mobile/feature/auth/presentation/cubit/log_in/log_in_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/di/injection_container.dart';
 import '../../../../core/widgets/button.dart';
 import '../../../../core/widgets/text_button.dart';
 import '../../domain/params/log_in_params.dart';
-import '../../domain/usecases/log_in_use_case.dart';
 import '../widget/custom_text_form_field.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -33,16 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) {
-        final dioClient = DioClient(config: AppConfig.current);
-        final apiService = ApiService(dioClient.dio);
-        final authRemoteDataSource = AuthRemoteDataSourceImpl(
-          apiService: apiService,
-        );
-        final authRepository = AuthRepositoryImpl(authRemoteDataSource);
-        final logInUseCase = LogInUseCase(repository: authRepository);
-        return LogInCubit(logInUseCase);
-      },
+      create: (context) => sl<LogInCubit>(),
       child: Scaffold(
         appBar: AppBar(
           leading: const SizedBox.shrink(),
@@ -180,7 +166,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: .center,
                   child: CustomTextButton(
                     onPressed: () {
-                      Navigator.of(context).pushNamed(RouterName.selectRoleRegister);
+                      Navigator.of(
+                        context,
+                      ).pushNamed(RouterName.selectRoleRegister);
                     },
                     title: "New to EduLearn? Create an account",
                   ),

@@ -1,0 +1,36 @@
+import 'package:edulearn_mobile/feature/auth/domain/usecases/register_student_use_case.dart';
+
+import '../../core/di/injection_container.dart';
+import '../../core/network/api_service.dart';
+import 'data/datasources/auth_remote_data_source.dart';
+import 'data/datasources/auth_remote_data_source_impl.dart';
+import 'data/repository/auth_repository_impl.dart';
+import 'domain/repository/auth_repository.dart';
+import 'domain/usecases/log_in_use_case.dart';
+import 'presentation/cubit/log_in/log_in_cubit.dart';
+import 'presentation/cubit/register_student/register_student_cubit.dart';
+
+void setupAuthDependencies() {
+  // Data
+  sl.registerLazySingleton<AuthRemoteDataSource>(
+    () => AuthRemoteDataSourceImpl(apiService: sl<ApiService>()),
+  );
+
+  sl.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(sl<AuthRemoteDataSource>()),
+  );
+
+  // Use cases
+  sl.registerLazySingleton(
+    () => LogInUseCase(repository: sl<AuthRepository>()),
+  );
+
+  sl.registerLazySingleton(
+    () => RegisterStudentUseCase(repository: sl<AuthRepository>()),
+  );
+
+  // Cubits
+  sl.registerFactory(() => LogInCubit(sl<LogInUseCase>()));
+
+  sl.registerFactory(() => RegisterStudentCubit(sl<RegisterStudentUseCase>()));
+}
