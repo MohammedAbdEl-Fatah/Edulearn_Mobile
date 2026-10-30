@@ -9,4 +9,6 @@ class RouterName {
   static const String signUp = "signUp";
   static const String home = "home";
   static const String selectRoleRegister = "selectRoleRegister";
+  static const String studentRegister = "studentRegister";
+  static const String teacherRegister = "teacherRegister";
 }
