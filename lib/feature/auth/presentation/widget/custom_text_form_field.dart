@@ -33,6 +33,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         Text(widget.header, style: AppStyle.captionSemiBold),
         SizedBox(height: context.h(8)),
         TextFormField(
+          scrollPadding: .zero,
           controller: widget._controller,
           validator: widget.validator,
           cursorColor: AppColors.primaryDefault,
