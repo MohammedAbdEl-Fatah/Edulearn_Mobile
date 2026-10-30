@@ -78,10 +78,11 @@ class _SelectRoleRegisterState extends State<SelectRoleRegister> {
             // button
             const Spacer(),
             Button(
-              title: "Continue as Student",
+              title:
+                  "Continue as ${selectedRole.replaceFirst(selectedRole[0], selectedRole[0].toUpperCase())}",
               onPressed: () {
                 if (selectedRole == "student") {
-                  // Navigator.pushNamed(context, RouterName.studentRegister);
+                  Navigator.pushNamed(context, RouterName.studentRegister);
                 } else {
                   // Navigator.pushNamed(context, RouterName.teacherRegister);
                 }
