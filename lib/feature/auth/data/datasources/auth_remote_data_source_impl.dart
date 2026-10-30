@@ -1,6 +1,7 @@
 import "package:edulearn_mobile/core/errors/result.dart";
 import "package:edulearn_mobile/core/network/api_service.dart";
 import "package:edulearn_mobile/core/network/end_piont_api.dart";
+import "package:edulearn_mobile/feature/auth/data/model/otp_model.dart";
 import "package:edulearn_mobile/feature/auth/data/model/request/register_student_request_model.dart";
 import "package:edulearn_mobile/feature/auth/data/model/response/register_student_response_model.dart";
 import "auth_remote_data_source.dart";
@@ -47,6 +48,18 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       data: request.toJson(),
       parser: (json) =>
           RegisterResponseModel.fromJson(json as Map<String, dynamic>),
+    );
+  }
+
+  @override
+  Future<Result<OtpModel>> confrimEamil({
+    required String email,
+    required String otp,
+  }) {
+    return _apiService.put(
+      path: AuthEndPiontApi.confirmEmail,
+      data: {"email": email, "otp": otp},
+      parser: (json) => OtpModel.fromJson(json as Map<String, dynamic>),
     );
   }
 }
