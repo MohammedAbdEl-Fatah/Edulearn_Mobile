@@ -11,8 +11,33 @@ import '../../../../core/widgets/text_button.dart';
 import '../widget/custom_change_role.dart';
 import '../widget/dob_field.dart';
 
-class StudentRegister extends StatelessWidget {
+class StudentRegister extends StatefulWidget {
   const StudentRegister({super.key});
+
+  @override
+  State<StudentRegister> createState() => _StudentRegisterState();
+}
+
+class _StudentRegisterState extends State<StudentRegister> {
+  final TextEditingController _controllerFirstName = TextEditingController();
+  final TextEditingController _controllerLastName = TextEditingController();
+  final TextEditingController _controllerEmail = TextEditingController();
+  final TextEditingController _controllerPassword = TextEditingController();
+  final TextEditingController _controllerConfirmPassword =
+      TextEditingController();
+  final TextEditingController _controllerPhone = TextEditingController();
+  DateTime? _dob;
+  @override
+  void dispose() {
+    _controllerFirstName.dispose();
+    _controllerLastName.dispose();
+    _controllerEmail.dispose();
+    _controllerPassword.dispose();
+    _controllerConfirmPassword.dispose();
+    _controllerPhone.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +80,7 @@ class StudentRegister extends StatelessWidget {
                     child: CustomTextFormField(
                       hintText: "Frist Name",
                       header: "Frist Name",
-                      controller: TextEditingController(),
+                      controller: _controllerFirstName,
                       isObscure: false,
                     ),
                   ),
@@ -64,7 +89,7 @@ class StudentRegister extends StatelessWidget {
                     child: CustomTextFormField(
                       hintText: "Last Name",
                       header: "Last Name",
-                      controller: TextEditingController(),
+                      controller: _controllerLastName,
                       isObscure: false,
                     ),
                   ),
@@ -74,7 +99,7 @@ class StudentRegister extends StatelessWidget {
               CustomTextFormField(
                 hintText: "Email",
                 header: "Email",
-                controller: TextEditingController(),
+                controller: _controllerEmail,
                 isObscure: false,
               ),
 
@@ -82,7 +107,7 @@ class StudentRegister extends StatelessWidget {
               CustomTextFormField(
                 hintText: "Password",
                 header: "Password",
-                controller: TextEditingController(),
+                controller: _controllerPassword,
                 isObscure: true,
               ),
               SizedBox(height: context.h(4)),
@@ -90,7 +115,7 @@ class StudentRegister extends StatelessWidget {
               CustomTextFormField(
                 hintText: "Confirm Password",
                 header: "Confirm Password",
-                controller: TextEditingController(),
+                controller: _controllerConfirmPassword,
                 isObscure: true,
               ),
 
@@ -98,16 +123,21 @@ class StudentRegister extends StatelessWidget {
               CustomTextFormField(
                 hintText: "Phone",
                 header: "Phone",
-                controller: TextEditingController(),
+                controller: _controllerPhone,
                 isObscure: false,
               ),
               SizedBox(height: context.h(4)),
-              const DobField(),
+              DobField(
+                onDateSelected: (date) {
+                  _dob = date;
+                },
+              ),
               SizedBox(height: context.h(20)),
               Button(
                 title: "Create Student account",
                 onPressed: () {
                   // logic to sign up for student
+                  print(_dob);
                 },
               ),
 

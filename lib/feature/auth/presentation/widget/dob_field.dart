@@ -3,7 +3,8 @@ import 'package:edulearn_mobile/core/theme/app_style.dart';
 import 'package:flutter/material.dart';
 
 class DobField extends StatefulWidget {
-  const DobField({super.key});
+  final ValueChanged<DateTime> onDateSelected;
+  const DobField({super.key, required this.onDateSelected});
 
   @override
   State<DobField> createState() => _DobFieldState();
@@ -22,6 +23,7 @@ class _DobFieldState extends State<DobField> {
 
     if (picked != null) {
       setState(() => selectedDob = picked);
+      widget.onDateSelected(picked);
     }
   }
 
