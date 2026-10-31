@@ -17,7 +17,7 @@ class RegisterTeacherCubit extends Cubit<RegisterTeacherState> {
       registerParams: registerParams,
     );
     result.fold(
-      (f) => emit(RegisterTeacherFailure(message: f.toString())),
+      (f) => emit(RegisterTeacherFailure(message: f.message)),
       (s) => emit(RegisterTeacherSuccess(registerEntity: s)),
     );
   }
