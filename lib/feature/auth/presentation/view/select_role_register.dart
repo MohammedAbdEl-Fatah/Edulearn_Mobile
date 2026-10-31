@@ -84,7 +84,7 @@ class _SelectRoleRegisterState extends State<SelectRoleRegister> {
                 if (selectedRole == "student") {
                   Navigator.pushNamed(context, RouterName.studentRegister);
                 } else {
-                  // Navigator.pushNamed(context, RouterName.teacherRegister);
+                  Navigator.pushNamed(context, RouterName.teacherRegister);
                 }
               },
             ),

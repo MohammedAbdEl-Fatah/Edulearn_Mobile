@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../feature/auth/presentation/view/select_role_register.dart';
 import '../../feature/auth/presentation/view/student_register.dart';
+import '../../feature/auth/presentation/view/teacher_register.dart';
 part 'router_name.dart';
 
 class AppRouter {
@@ -34,7 +35,13 @@ class AppRouter {
           builder: (_) => const StudentRegister(),
           settings: setting,
         );
-      //TODO register teacher
+
+      case RouterName.teacherRegister:
+        return MaterialPageRoute(
+          builder: (_) => const TeacherRegister(),
+          settings: setting,
+        );
+
       default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(
