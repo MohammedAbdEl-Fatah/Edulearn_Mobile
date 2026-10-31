@@ -95,7 +95,11 @@ class _SelectRoleRegisterState extends State<SelectRoleRegister> {
               child: CustomTextButton(
                 title: "Already have an account? Login",
                 onPressed: () {
-                  Navigator.pushNamed(context, RouterName.login);
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    RouterName.login,
+                    (route) => false,
+                  );
                 },
               ),
             ),

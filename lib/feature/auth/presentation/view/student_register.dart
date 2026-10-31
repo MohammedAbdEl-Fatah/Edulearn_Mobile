@@ -85,7 +85,7 @@ class _StudentRegisterState extends State<StudentRegister> {
                     const Spacer(),
                     CustomTextButton(
                       onPressed: () {
-                        Navigator.pushNamed(
+                        Navigator.pushReplacementNamed(
                           context,
                           RouterName.teacherRegister,
                         );
@@ -196,7 +196,11 @@ class _StudentRegisterState extends State<StudentRegister> {
                   child: CustomTextButton(
                     title: "Already have an account? Login",
                     onPressed: () {
-                      Navigator.pushNamed(context, RouterName.login);
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        RouterName.login,
+                        (route) => false,
+                      );
                     },
                   ),
                 ),

@@ -85,7 +85,7 @@ class _TeacherRegisterState extends State<TeacherRegister> {
                     const Spacer(),
                     CustomTextButton(
                       onPressed: () {
-                        Navigator.pushNamed(
+                        Navigator.pushReplacementNamed(
                           context,
                           RouterName.studentRegister,
                         );
@@ -161,7 +161,7 @@ class _TeacherRegisterState extends State<TeacherRegister> {
                   builder: (context, state) {
                     return state is RegisterTeacherInitial
                         ? Button(
-                            title: "Create Student account",
+                            title: "Create Teacher account",
                             onPressed: () => _registeTeacher(context),
                           )
                         : state is RegisterTeacherLoading
@@ -196,7 +196,11 @@ class _TeacherRegisterState extends State<TeacherRegister> {
                   child: CustomTextButton(
                     title: "Already have an account? Login",
                     onPressed: () {
-                      Navigator.pushNamed(context, RouterName.login);
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        RouterName.login,
+                        (route) => false,
+                      );
                     },
                   ),
                 ),
