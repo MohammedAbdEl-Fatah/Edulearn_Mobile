@@ -5,8 +5,8 @@ import '../../../../core/theme/app_style.dart';
 import '../../../../core/theme/extension.dart';
 
 class CustomChangeRole extends StatelessWidget {
-  const CustomChangeRole({super.key});
-
+  const CustomChangeRole({super.key, required this.role});
+  final String role;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,14 +22,16 @@ class CustomChangeRole extends StatelessWidget {
       child: Row(
         mainAxisSize: .min,
         children: [
-          const Icon(
-            Icons.school_rounded,
+          Icon(
+            role == "Student"
+                ? Icons.school_rounded
+                : Icons.online_prediction_outlined,
             size: 14,
             color: AppColors.primaryDefault,
           ),
           SizedBox(width: context.w(6)),
           Text(
-            "Student",
+            role,
             style: AppStyle.smallSemiBold.copyWith(
               color: AppColors.primaryDefault,
             ),

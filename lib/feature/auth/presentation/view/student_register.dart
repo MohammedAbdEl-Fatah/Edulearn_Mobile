@@ -81,11 +81,14 @@ class _StudentRegisterState extends State<StudentRegister> {
                 SizedBox(height: context.h(12)),
                 Row(
                   children: [
-                    const CustomChangeRole(),
+                    const CustomChangeRole(role: "Student"),
                     const Spacer(),
                     CustomTextButton(
                       onPressed: () {
-                        // navigator to register teacher
+                        Navigator.pushNamed(
+                          context,
+                          RouterName.teacherRegister,
+                        );
                       },
                       title: "Change role",
                     ),
