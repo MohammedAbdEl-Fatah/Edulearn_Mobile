@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:edulearn_mobile/feature/auth/domain/entity/auth_token_entity.dart';
 import 'package:edulearn_mobile/feature/auth/domain/params/log_in_params.dart';

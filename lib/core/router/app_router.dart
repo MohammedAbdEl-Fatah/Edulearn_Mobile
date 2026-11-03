@@ -5,6 +5,7 @@ import 'package:edulearn_mobile/feature/onbording/presentation/view/onbording_sc
 import 'package:edulearn_mobile/feature/splash/presentation/splash_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../feature/auth/presentation/view/forget_password_screen.dart';
 import '../../feature/auth/presentation/view/select_role_register.dart';
 import '../../feature/auth/presentation/view/student_register.dart';
 import '../../feature/auth/presentation/view/teacher_register.dart';
@@ -45,6 +46,11 @@ class AppRouter {
       case RouterName.confirmEmail:
         return MaterialPageRoute(
           builder: (_) => const ConfirmEmailScreen(),
+          settings: setting,
+        );
+      case RouterName.forgotPasswordScreen:
+        return MaterialPageRoute(
+          builder: (_) => ForgotPasswordScreen(),
           settings: setting,
         );
 

@@ -12,5 +12,5 @@ class RouterName {
   static const String studentRegister = "studentRegister";
   static const String teacherRegister = "teacherRegister";
   static const String confirmEmail = "confirmEmail";
-
+  static const String forgotPasswordScreen = "forgetPassword";
 }

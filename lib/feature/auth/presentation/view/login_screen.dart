@@ -82,7 +82,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   Align(
                     alignment: .centerEnd,
                     child: CustomTextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, RouterName.forgotPasswordScreen);
+                      },
                       title: "Forgot password?",
                     ),
                   ),
@@ -155,8 +157,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               ? const CircularProgressIndicator()
                               : Button(
                                   onPressed: () {
-                                    if (!_formKey.currentState!.validate())
+                                    if (!_formKey.currentState!.validate()) {
                                       return;
+                                    }
                                     final params = LoginParams(
                                       email: _controllerEmail.text,
                                       password: _controllerPassword.text,

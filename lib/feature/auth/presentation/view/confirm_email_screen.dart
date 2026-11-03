@@ -6,7 +6,6 @@ import 'package:edulearn_mobile/core/router/app_router.dart';
 import 'package:edulearn_mobile/core/theme/app_style.dart';
 import 'package:edulearn_mobile/core/theme/extension.dart';
 import 'package:edulearn_mobile/core/widgets/button.dart';
-import 'package:edulearn_mobile/core/widgets/text_button.dart';
 import 'package:edulearn_mobile/feature/auth/domain/params/otp_params.dart';
 import 'package:edulearn_mobile/feature/auth/presentation/cubit/confirm_email/confirm_email_cubit.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +14,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/logo.dart';
+import '../widget/custom_icon_label.dart';
 
 class ConfirmEmailScreen extends StatefulWidget {
   const ConfirmEmailScreen({super.key});
@@ -82,21 +82,7 @@ class _ConfirmEmailScreenState extends State<ConfirmEmailScreen> {
             child: Column(
               crossAxisAlignment: .start,
               children: [
-                Align(
-                  alignment: .center,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.primaryTint,
-                      borderRadius: BorderRadius.circular(22.5),
-                      border: Border.all(color: AppColors.primaryTint),
-                    ),
-                    child: const Icon(
-                      Icons.mark_email_read_sharp,
-                      size: 32 * 4,
-                      color: AppColors.primaryDefault,
-                    ),
-                  ),
-                ),
+                const CustomIconLabel(icon: Icons.mark_email_read_sharp),
                 const Text('Check your inbox', style: AppStyle.h1),
                 Text(
                   "Enter the 6-digit code we sent to your email to verify your account.",
