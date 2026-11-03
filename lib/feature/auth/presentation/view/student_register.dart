@@ -3,6 +3,7 @@ import 'package:edulearn_mobile/core/theme/app_colors.dart';
 import 'package:edulearn_mobile/core/theme/app_style.dart';
 import 'package:edulearn_mobile/core/theme/extension.dart';
 import 'package:edulearn_mobile/feature/auth/domain/params/register_params.dart';
+import 'package:edulearn_mobile/feature/auth/domain/validation_field.dart';
 import 'package:edulearn_mobile/feature/auth/presentation/cubit/register_student/register_student_cubit.dart';
 import 'package:edulearn_mobile/feature/auth/presentation/widget/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ class _StudentRegisterState extends State<StudentRegister> {
       TextEditingController();
   final TextEditingController _controllerPhone = TextEditingController();
   DateTime? _dob;
+  final _formKey = GlobalKey<FormState>();
   @override
   void dispose() {
     _controllerFirstName.dispose();
@@ -43,6 +45,7 @@ class _StudentRegisterState extends State<StudentRegister> {
   }
 
   void _registerStudent() {
+    if (_formKey.currentState!.validate()) return;
     final reqTap = RegisterParams(
       firstName: _controllerFirstName.text,
       lastName: _controllerLastName.text,
@@ -69,142 +72,157 @@ class _StudentRegisterState extends State<StudentRegister> {
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: context.w(15)),
-            child: Column(
-              spacing: context.h(10),
-              crossAxisAlignment: .start,
-              children: [
-                const Text("Start your next chapter", style: AppStyle.h1),
-                Text(
-                  "Create your account and make space for something new.",
-                  style: AppStyle.caption.copyWith(color: AppColors.textGray),
-                ),
-                SizedBox(height: context.h(12)),
-                Row(
-                  children: [
-                    const CustomChangeRole(role: "Student"),
-                    const Spacer(),
-                    CustomTextButton(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(
-                          context,
-                          RouterName.teacherRegister,
-                        );
-                      },
-                      title: "Change role",
-                    ),
-                  ],
-                ),
-
-                SizedBox(height: context.h(12)),
-                Row(
-                  children: [
-                    Expanded(
-                      child: CustomTextFormField(
-                        hintText: "Frist Name",
-                        header: "Frist Name",
-                        controller: _controllerFirstName,
-                        isObscure: false,
-                      ),
-                    ),
-                    SizedBox(width: context.w(8)),
-                    Expanded(
-                      child: CustomTextFormField(
-                        hintText: "Last Name",
-                        header: "Last Name",
-                        controller: _controllerLastName,
-                        isObscure: false,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: context.h(4)),
-                CustomTextFormField(
-                  hintText: "Email",
-                  header: "Email",
-                  controller: _controllerEmail,
-                  isObscure: false,
-                ),
-
-                SizedBox(height: context.h(4)),
-                CustomTextFormField(
-                  hintText: "Password",
-                  header: "Password",
-                  controller: _controllerPassword,
-                  isObscure: true,
-                ),
-                SizedBox(height: context.h(4)),
-
-                CustomTextFormField(
-                  hintText: "Confirm Password",
-                  header: "Confirm Password",
-                  controller: _controllerConfirmPassword,
-                  isObscure: true,
-                ),
-
-                SizedBox(height: context.h(4)),
-                CustomTextFormField(
-                  hintText: "Phone",
-                  header: "Phone",
-                  controller: _controllerPhone,
-                  isObscure: false,
-                ),
-                SizedBox(height: context.h(4)),
-                DobField(
-                  onDateSelected: (date) {
-                    _dob = date;
-                  },
-                ),
-                SizedBox(height: context.h(20)),
-                BlocBuilder<RegisterStudentCubit, RegisterStudentState>(
-                  builder: (context, state) {
-                    return state is InitialRegisterStudentState
-                        ? Button(
-                            title: "Create Student account",
-                            onPressed: _registerStudent,
-                          )
-                        : state is LoadingRegisterStudentState
-                        ? const Center(child: CircularProgressIndicator())
-                        : Column(
-                            children: [
-                              Button(
-                                title: "Create Student account",
-                                onPressed: _registerStudent,
-                              ),
-                              state is SuccessRegisterStudentState
-                                  ? Text(
-                                      "success",
-                                      style: AppStyle.captionBold.copyWith(
-                                        color: AppColors.successDefault,
-                                      ),
-                                    )
-                                  : state is ErrorRegisterStudentState
-                                  ? Text(
-                                      state.message,
-                                      style: AppStyle.captionBold.copyWith(
-                                        color: AppColors.errorDefault,
-                                      ),
-                                    )
-                                  : const SizedBox.shrink(),
-                            ],
+            child: Form(
+              key: _formKey,
+              child: Column(
+                spacing: context.h(10),
+                crossAxisAlignment: .start,
+                children: [
+                  const Text("Start your next chapter", style: AppStyle.h1),
+                  Text(
+                    "Create your account and make space for something new.",
+                    style: AppStyle.caption.copyWith(color: AppColors.textGray),
+                  ),
+                  SizedBox(height: context.h(12)),
+                  Row(
+                    children: [
+                      const CustomChangeRole(role: "Student"),
+                      const Spacer(),
+                      CustomTextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            RouterName.teacherRegister,
                           );
-                  },
-                ),
+                        },
+                        title: "Change role",
+                      ),
+                    ],
+                  ),
 
-                //has account text button
-                Align(
-                  alignment: Alignment.center,
-                  child: CustomTextButton(
-                    title: "Already have an account? Login",
-                    onPressed: () {
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        RouterName.login,
-                        (route) => false,
-                      );
+                  SizedBox(height: context.h(12)),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomTextFormField(
+                          hintText: "Frist Name",
+                          header: "Frist Name",
+                          controller: _controllerFirstName,
+                          isObscure: false,
+                          validator: (p0) =>
+                              ValidationField.isValidFieldName(p0),
+                        ),
+                      ),
+                      SizedBox(width: context.w(8)),
+                      Expanded(
+                        child: CustomTextFormField(
+                          hintText: "Last Name",
+                          header: "Last Name",
+                          controller: _controllerLastName,
+                          isObscure: false,
+                          validator: (p0) =>
+                              ValidationField.isValidFieldName(p0),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: context.h(4)),
+                  CustomTextFormField(
+                    hintText: "Email",
+                    header: "Email",
+                    controller: _controllerEmail,
+                    isObscure: false,
+                    validator: (p0) => ValidationField.isValidFieldEmail(p0),
+                  ),
+
+                  SizedBox(height: context.h(4)),
+                  CustomTextFormField(
+                    hintText: "Password",
+                    header: "Password",
+                    controller: _controllerPassword,
+                    isObscure: true,
+                    validator: (p0) => ValidationField.isValidFieldPassword(p0),
+                  ),
+                  SizedBox(height: context.h(4)),
+
+                  CustomTextFormField(
+                    hintText: "Confirm Password",
+                    header: "Confirm Password",
+                    controller: _controllerConfirmPassword,
+                    isObscure: true,
+                    validator: (p0) =>
+                        ValidationField.isValidFieldConfirmPassword(
+                          p0,
+                          _controllerPassword.text,
+                        ),
+                  ),
+
+                  SizedBox(height: context.h(4)),
+                  CustomTextFormField(
+                    hintText: "Phone",
+                    header: "Phone",
+                    controller: _controllerPhone,
+                    isObscure: false,
+                    validator: (p0) => ValidationField.isValidFieldPhone(p0),
+                  ),
+                  SizedBox(height: context.h(4)),
+                  DobField(
+                    onDateSelected: (date) {
+                      _dob = date;
                     },
                   ),
-                ),
-              ],
+                  SizedBox(height: context.h(20)),
+                  BlocBuilder<RegisterStudentCubit, RegisterStudentState>(
+                    builder: (context, state) {
+                      return state is InitialRegisterStudentState
+                          ? Button(
+                              title: "Create Student account",
+                              onPressed: _registerStudent,
+                            )
+                          : state is LoadingRegisterStudentState
+                          ? const Center(child: CircularProgressIndicator())
+                          : Column(
+                              children: [
+                                Button(
+                                  title: "Create Student account",
+                                  onPressed: _registerStudent,
+                                ),
+                                state is SuccessRegisterStudentState
+                                    ? Text(
+                                        "success",
+                                        style: AppStyle.captionBold.copyWith(
+                                          color: AppColors.successDefault,
+                                        ),
+                                      )
+                                    : state is ErrorRegisterStudentState
+                                    ? Text(
+                                        state.message,
+                                        style: AppStyle.captionBold.copyWith(
+                                          color: AppColors.errorDefault,
+                                        ),
+                                      )
+                                    : const SizedBox.shrink(),
+                              ],
+                            );
+                    },
+                  ),
+
+                  //has account text button
+                  Align(
+                    alignment: Alignment.center,
+                    child: CustomTextButton(
+                      title: "Already have an account? Login",
+                      onPressed: () {
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          RouterName.login,
+                          (route) => false,
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

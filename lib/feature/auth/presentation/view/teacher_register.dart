@@ -1,6 +1,7 @@
 import 'package:edulearn_mobile/core/di/injection_container.dart';
 import 'package:edulearn_mobile/core/theme/app_style.dart';
 import 'package:edulearn_mobile/core/theme/extension.dart';
+import 'package:edulearn_mobile/feature/auth/domain/validation_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,6 +32,7 @@ class _TeacherRegisterState extends State<TeacherRegister> {
       TextEditingController();
   final TextEditingController _controllerPhone = TextEditingController();
   DateTime? _dob;
+  final _formKey = GlobalKey<FormState>();
   @override
   void dispose() {
     _controllerFirstName.dispose();
@@ -43,6 +45,7 @@ class _TeacherRegisterState extends State<TeacherRegister> {
   }
 
   void _registeTeacher(BuildContext context) {
+    if (_formKey.currentState!.validate()) return;
     final pragma = RegisterParams(
       firstName: _controllerFirstName.text,
       lastName: _controllerLastName.text,
@@ -68,143 +71,158 @@ class _TeacherRegisterState extends State<TeacherRegister> {
         body: Padding(
           padding: const .symmetric(horizontal: 22, vertical: 24),
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: .start,
-              children: [
-                const Text("Share your expertise", style: AppStyle.h1),
-                SizedBox(height: context.h(10)),
-                Text(
-                  "Create courses. Help students grow.",
-                  style: AppStyle.caption.copyWith(color: AppColors.textGray),
-                ),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: .start,
+                children: [
+                  const Text("Share your expertise", style: AppStyle.h1),
+                  SizedBox(height: context.h(10)),
+                  Text(
+                    "Create courses. Help students grow.",
+                    style: AppStyle.caption.copyWith(color: AppColors.textGray),
+                  ),
 
-                SizedBox(height: context.h(12)),
-                Row(
-                  children: [
-                    const CustomChangeRole(role: "Teacher"),
-                    const Spacer(),
-                    CustomTextButton(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(
-                          context,
-                          RouterName.studentRegister,
-                        );
-                      },
-                      title: "Change role",
-                    ),
-                  ],
-                ),
-
-                SizedBox(height: context.h(12)),
-                Row(
-                  children: [
-                    Expanded(
-                      child: CustomTextFormField(
-                        hintText: "Frist Name",
-                        header: "Frist Name",
-                        controller: _controllerFirstName,
-                        isObscure: false,
-                      ),
-                    ),
-                    SizedBox(width: context.w(8)),
-                    Expanded(
-                      child: CustomTextFormField(
-                        hintText: "Last Name",
-                        header: "Last Name",
-                        controller: _controllerLastName,
-                        isObscure: false,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: context.h(4)),
-                CustomTextFormField(
-                  hintText: "Email",
-                  header: "Email",
-                  controller: _controllerEmail,
-                  isObscure: false,
-                ),
-
-                SizedBox(height: context.h(4)),
-                CustomTextFormField(
-                  hintText: "Password",
-                  header: "Password",
-                  controller: _controllerPassword,
-                  isObscure: true,
-                ),
-                SizedBox(height: context.h(4)),
-
-                CustomTextFormField(
-                  hintText: "Confirm Password",
-                  header: "Confirm Password",
-                  controller: _controllerConfirmPassword,
-                  isObscure: true,
-                ),
-
-                SizedBox(height: context.h(4)),
-                CustomTextFormField(
-                  hintText: "Phone",
-                  header: "Phone",
-                  controller: _controllerPhone,
-                  isObscure: false,
-                ),
-                SizedBox(height: context.h(4)),
-                DobField(
-                  onDateSelected: (date) {
-                    _dob = date;
-                  },
-                ),
-                SizedBox(height: context.h(20)),
-
-                //button
-                BlocBuilder<RegisterTeacherCubit, RegisterTeacherState>(
-                  builder: (context, state) {
-                    return state is RegisterTeacherInitial
-                        ? Button(
-                            title: "Create Teacher account",
-                            onPressed: () => _registeTeacher(context),
-                          )
-                        : state is RegisterTeacherLoading
-                        ? const Center(child: CircularProgressIndicator())
-                        : Column(
-                            children: [
-                              Button(
-                                title: "Create Student account",
-                                onPressed: () => _registeTeacher(context),
-                              ),
-                              state is RegisterTeacherSuccess
-                                  ? Text(
-                                      "success",
-                                      style: AppStyle.captionBold.copyWith(
-                                        color: AppColors.successDefault,
-                                      ),
-                                    )
-                                  : state is RegisterTeacherFailure
-                                  ? Text(
-                                      state.message,
-                                      style: AppStyle.captionBold.copyWith(
-                                        color: AppColors.errorDefault,
-                                      ),
-                                    )
-                                  : const SizedBox.shrink(),
-                            ],
+                  SizedBox(height: context.h(12)),
+                  Row(
+                    children: [
+                      const CustomChangeRole(role: "Teacher"),
+                      const Spacer(),
+                      CustomTextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            RouterName.studentRegister,
                           );
-                  },
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: CustomTextButton(
-                    title: "Already have an account? Login",
-                    onPressed: () {
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        RouterName.login,
-                        (route) => false,
-                      );
+                        },
+                        title: "Change role",
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: context.h(12)),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomTextFormField(
+                          hintText: "Frist Name",
+                          header: "Frist Name",
+                          controller: _controllerFirstName,
+                          isObscure: false,
+                          validator: (p0) =>
+                              ValidationField.isValidFieldName(p0),
+                        ),
+                      ),
+                      SizedBox(width: context.w(8)),
+                      Expanded(
+                        child: CustomTextFormField(
+                          hintText: "Last Name",
+                          header: "Last Name",
+                          controller: _controllerLastName,
+                          isObscure: false,
+                          validator: (p0) =>
+                              ValidationField.isValidFieldName(p0),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: context.h(4)),
+                  CustomTextFormField(
+                    hintText: "Email",
+                    header: "Email",
+                    controller: _controllerEmail,
+                    isObscure: false,
+                    validator: (p0) => ValidationField.isValidFieldEmail(p0),
+                  ),
+
+                  SizedBox(height: context.h(4)),
+                  CustomTextFormField(
+                    hintText: "Password",
+                    header: "Password",
+                    controller: _controllerPassword,
+                    isObscure: true,
+                    validator: (p0) => ValidationField.isValidFieldPassword(p0),
+                  ),
+                  SizedBox(height: context.h(4)),
+
+                  CustomTextFormField(
+                    hintText: "Confirm Password",
+                    header: "Confirm Password",
+                    controller: _controllerConfirmPassword,
+                    isObscure: true,
+                    validator: (p0) =>
+                        ValidationField.isValidFieldConfirmPassword(
+                          p0,
+                          _controllerPassword.text,
+                        ),
+                  ),
+
+                  SizedBox(height: context.h(4)),
+                  CustomTextFormField(
+                    hintText: "Phone",
+                    header: "Phone",
+                    controller: _controllerPhone,
+                    isObscure: false,
+                    validator: (p0) => ValidationField.isValidFieldPhone(p0),
+                  ),
+                  SizedBox(height: context.h(4)),
+                  DobField(
+                    onDateSelected: (date) {
+                      _dob = date;
                     },
                   ),
-                ),
-              ],
+                  SizedBox(height: context.h(20)),
+
+                  //button
+                  BlocBuilder<RegisterTeacherCubit, RegisterTeacherState>(
+                    builder: (context, state) {
+                      return state is RegisterTeacherInitial
+                          ? Button(
+                              title: "Create Teacher account",
+                              onPressed: () => _registeTeacher(context),
+                            )
+                          : state is RegisterTeacherLoading
+                          ? const Center(child: CircularProgressIndicator())
+                          : Column(
+                              children: [
+                                Button(
+                                  title: "Create Teacher account",
+                                  onPressed: () => _registeTeacher(context),
+                                ),
+                                state is RegisterTeacherSuccess
+                                    ? Text(
+                                        "success",
+                                        style: AppStyle.captionBold.copyWith(
+                                          color: AppColors.successDefault,
+                                        ),
+                                      )
+                                    : state is RegisterTeacherFailure
+                                    ? Text(
+                                        state.message,
+                                        style: AppStyle.captionBold.copyWith(
+                                          color: AppColors.errorDefault,
+                                        ),
+                                      )
+                                    : const SizedBox.shrink(),
+                              ],
+                            );
+                    },
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: CustomTextButton(
+                      title: "Already have an account? Login",
+                      onPressed: () {
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          RouterName.login,
+                          (route) => false,
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
