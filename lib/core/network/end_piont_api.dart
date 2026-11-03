@@ -5,5 +5,6 @@ class AuthEndPiontApi {
   static const String confirmEmail = '/auth/confirm-email';
   static const String logout = '/auth/logout';
   static const String refreshToken = '/auth/refresh-token';
+  static const String resendOtp = '/auth/generated-otp';
 }
 

@@ -1,3 +1,4 @@
+import 'package:edulearn_mobile/feature/auth/domain/usecases/confirm_email_use_case.dart';
 import 'package:edulearn_mobile/feature/auth/domain/usecases/register_student_use_case.dart';
 
 import '../../core/di/injection_container.dart';
@@ -8,6 +9,7 @@ import 'data/repository/auth_repository_impl.dart';
 import 'domain/repository/auth_repository.dart';
 import 'domain/usecases/log_in_use_case.dart';
 import 'domain/usecases/register_teacher_use_case.dart';
+import 'presentation/cubit/confirm_email/confirm_email_cubit.dart';
 import 'presentation/cubit/log_in/log_in_cubit.dart';
 import 'presentation/cubit/register_student/register_student_cubit.dart';
 import 'presentation/cubit/register_teacher/register_teacher_cubit.dart';
@@ -34,9 +36,14 @@ void setupAuthDependencies() {
   sl.registerLazySingleton(
     () => RegisterTeacherUseCase(repository: sl<AuthRepository>()),
   );
+
+  sl.registerLazySingleton(
+    () => ConfirmEmailUseCase(repository: sl<AuthRepository>()),
+  );
   // Cubits
   sl.registerFactory(() => LogInCubit(sl<LogInUseCase>()));
 
   sl.registerFactory(() => RegisterStudentCubit(sl<RegisterStudentUseCase>()));
   sl.registerFactory(() => RegisterTeacherCubit(sl<RegisterTeacherUseCase>()));
+  sl.registerFactory(() => ConfirmEmailCubit(sl<ConfirmEmailUseCase>()));
 }
