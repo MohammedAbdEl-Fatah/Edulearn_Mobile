@@ -65,6 +65,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               borderSide: const BorderSide(color: AppColors.border),
               borderRadius: BorderRadius.circular(16),
             ),
+            errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: AppColors.errorDefault),
+              borderRadius: BorderRadius.circular(16),
+            ),
           ),
         ),
       ],
