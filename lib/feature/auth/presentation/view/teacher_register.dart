@@ -45,7 +45,7 @@ class _TeacherRegisterState extends State<TeacherRegister> {
   }
 
   void _registeTeacher(BuildContext context) {
-    if (_formKey.currentState!.validate()) return;
+    if (!_formKey.currentState!.validate()) return;
     final pragma = RegisterParams(
       firstName: _controllerFirstName.text,
       lastName: _controllerLastName.text,

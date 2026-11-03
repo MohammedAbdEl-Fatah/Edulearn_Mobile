@@ -45,7 +45,7 @@ class _StudentRegisterState extends State<StudentRegister> {
   }
 
   void _registerStudent() {
-    if (_formKey.currentState!.validate()) return;
+    if (!_formKey.currentState!.validate()) return;
     final reqTap = RegisterParams(
       firstName: _controllerFirstName.text,
       lastName: _controllerLastName.text,
