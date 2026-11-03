@@ -1,4 +1,5 @@
 import 'package:edulearn_mobile/core/theme/app_style.dart';
+import 'package:edulearn_mobile/feature/auth/presentation/view/confirm_email_screen.dart';
 import 'package:edulearn_mobile/feature/auth/presentation/view/login_screen.dart';
 import 'package:edulearn_mobile/feature/onbording/presentation/view/onbording_screen.dart';
 import 'package:edulearn_mobile/feature/splash/presentation/splash_screen.dart';
@@ -39,6 +40,11 @@ class AppRouter {
       case RouterName.teacherRegister:
         return MaterialPageRoute(
           builder: (_) => const TeacherRegister(),
+          settings: setting,
+        );
+      case RouterName.confirmEmail:
+        return MaterialPageRoute(
+          builder: (_) => const ConfirmEmailScreen(),
           settings: setting,
         );
 
