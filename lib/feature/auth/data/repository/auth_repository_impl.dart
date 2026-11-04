@@ -7,8 +7,10 @@ import 'package:edulearn_mobile/feature/auth/domain/entity/otp_entity.dart';
 
 import 'package:edulearn_mobile/feature/auth/domain/params/log_in_params.dart';
 
+import '../../domain/entity/forgot_password_entity.dart';
 import '../../domain/entity/genareted_otp_entity.dart';
 import '../../domain/entity/register_entity.dart';
+import '../../domain/params/forgot_password_params.dart';
 import '../../domain/params/otp_params.dart';
 import '../../domain/params/register_params.dart';
 import '../../domain/repository/auth_repository.dart';
@@ -43,9 +45,20 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<void> forgotPassword({required String email}) {
-    // TODO: implement forgotPassword
-    throw UnimplementedError();
+  Future<Result<ForgotPasswordEntity>> forgotPassword({
+    required ForgotPasswordParams params,
+  }) async {
+    final result = await _authRemoteDataSource.forgotPassword(
+      otp: params.otp,
+      email: params.email,
+      password: params.password,
+    );
+    return result.fold(
+      (failure) => Failed<ForgotPasswordEntity>(failure),
+      (success) => Success<ForgotPasswordEntity>(
+        ForgotPasswordEntity(message: success.message),
+      ),
+    );
   }
 
   @override

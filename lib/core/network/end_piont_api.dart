@@ -6,5 +6,5 @@ class AuthEndPiontApi {
   static const String logout = '/auth/logout';
   static const String refreshToken = '/auth/refresh-token';
   static const String resendOtp = '/auth/generated-otp';
+  static const String forgotPassword = '/auth/forget-password';
 }
-

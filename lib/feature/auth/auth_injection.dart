@@ -1,5 +1,7 @@
 import 'package:edulearn_mobile/feature/auth/domain/usecases/confirm_email_use_case.dart';
+import 'package:edulearn_mobile/feature/auth/domain/usecases/forgot_password_use_case.dart';
 import 'package:edulearn_mobile/feature/auth/domain/usecases/register_student_use_case.dart';
+import 'package:edulearn_mobile/feature/auth/presentation/cubit/reset_password/reset_password_cubit.dart';
 import 'package:edulearn_mobile/feature/auth/presentation/cubit/resend_otp/resend_otp_cubit.dart';
 
 import '../../core/di/injection_container.dart';
@@ -45,6 +47,9 @@ void setupAuthDependencies() {
   sl.registerLazySingleton(
     () => ResendOtpUseCase(repository: sl<AuthRepository>()),
   );
+  sl.registerLazySingleton(
+    () => ForgotPasswordUseCase(repository: sl<AuthRepository>()),
+  );
   // Cubits
   sl.registerFactory(() => LogInCubit(sl<LogInUseCase>()));
 
@@ -52,4 +57,5 @@ void setupAuthDependencies() {
   sl.registerFactory(() => RegisterTeacherCubit(sl<RegisterTeacherUseCase>()));
   sl.registerFactory(() => ConfirmEmailCubit(sl<ConfirmEmailUseCase>()));
   sl.registerFactory(() => ResendOtpCubit(sl<ResendOtpUseCase>()));
+  sl.registerFactory(() => ResetPasswordCubit(sl<ForgotPasswordUseCase>()));
 }

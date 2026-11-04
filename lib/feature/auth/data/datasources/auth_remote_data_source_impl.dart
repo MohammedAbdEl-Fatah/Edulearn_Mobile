@@ -1,6 +1,7 @@
 import "package:edulearn_mobile/core/errors/result.dart";
 import "package:edulearn_mobile/core/network/api_service.dart";
 import "package:edulearn_mobile/core/network/end_piont_api.dart";
+import "package:edulearn_mobile/feature/auth/data/model/forgot_password_model.dart";
 import "package:edulearn_mobile/feature/auth/data/model/genareted_otp_model.dart";
 import "package:edulearn_mobile/feature/auth/data/model/otp_model.dart";
 import "package:edulearn_mobile/feature/auth/data/model/request/register_student_request_model.dart";
@@ -71,6 +72,20 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       data: GenaretedOtpModel.toJson(email),
       parser: (json) =>
           GenaretedOtpModel.fromJson(json as Map<String, dynamic>),
+    );
+  }
+
+  @override
+  Future<Result<ForgotPasswordModel>> forgotPassword({
+    required String otp,
+    required String email,
+    required String password,
+  }) {
+    return _apiService.post<ForgotPasswordModel>(
+      path: AuthEndPiontApi.forgotPassword,
+      data: {"otp": otp, "email": email, "newPassword": password},
+      parser: (json) =>
+          ForgotPasswordModel.fromJson(json as Map<String, dynamic>),
     );
   }
 }
