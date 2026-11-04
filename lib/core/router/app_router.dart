@@ -45,7 +45,7 @@ class AppRouter {
         );
       case RouterName.confirmEmail:
         return MaterialPageRoute(
-          builder: (_) => const ConfirmEmailScreen(),
+          builder: (_) => ConfirmEmailScreen(email: setting.arguments as String),
           settings: setting,
         );
       case RouterName.forgotPasswordScreen:

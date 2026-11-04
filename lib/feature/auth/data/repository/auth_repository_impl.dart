@@ -7,6 +7,7 @@ import 'package:edulearn_mobile/feature/auth/domain/entity/otp_entity.dart';
 
 import 'package:edulearn_mobile/feature/auth/domain/params/log_in_params.dart';
 
+import '../../domain/entity/genareted_otp_entity.dart';
 import '../../domain/entity/register_entity.dart';
 import '../../domain/params/otp_params.dart';
 import '../../domain/params/register_params.dart';
@@ -35,7 +36,10 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Result<OtpEntity>> confirmEmail({required OtpParams otpParams}) {
-    return _authRemoteDataSource.confrimEamil(email: otpParams.email, otp: otpParams.otp);
+    return _authRemoteDataSource.confrimEamil(
+      email: otpParams.email,
+      otp: otpParams.otp,
+    );
   }
 
   @override
@@ -97,8 +101,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<void> resendOtp({required String email}) {
-    // TODO: implement resendOtp
-    throw UnimplementedError();
+  Future<Result<GenaretedOtpEntity>> resendOtp({required String email}) {
+    return _authRemoteDataSource.resendOtp(email: email);
   }
 }

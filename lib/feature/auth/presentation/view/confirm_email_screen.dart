@@ -17,14 +17,13 @@ import '../../../../core/widgets/logo.dart';
 import '../widget/custom_icon_label.dart';
 
 class ConfirmEmailScreen extends StatefulWidget {
-  const ConfirmEmailScreen({super.key});
-
+  const ConfirmEmailScreen({super.key, required this.email});
+  final String email;
   @override
   State<ConfirmEmailScreen> createState() => _ConfirmEmailScreenState();
 }
 
 class _ConfirmEmailScreenState extends State<ConfirmEmailScreen> {
-  final email = "mohammedabdelfatah837@gmail.com";
   final PinInputController _pinController = PinInputController();
 
   bool get _isOtpComplete => _pinController.text.length == 6;
@@ -89,7 +88,7 @@ class _ConfirmEmailScreenState extends State<ConfirmEmailScreen> {
                   style: AppStyle.caption.copyWith(color: AppColors.textGray),
                 ),
                 SizedBox(height: context.h(12)),
-                Text(email.maskString, style: AppStyle.bodySemiBold),
+                Text(widget.email.maskString, style: AppStyle.bodySemiBold),
                 //pin
                 SizedBox(height: context.h(70)),
                 BlocBuilder<ConfirmEmailCubit, ConfirmEmailState>(
@@ -219,7 +218,7 @@ class _ConfirmEmailScreenState extends State<ConfirmEmailScreen> {
                           ? () {
                               context.read<ConfirmEmailCubit>().confirmEmail(
                                 OtpParams(
-                                  email: email,
+                                  email: widget.email,
                                   otp: _pinController.text,
                                 ),
                               );

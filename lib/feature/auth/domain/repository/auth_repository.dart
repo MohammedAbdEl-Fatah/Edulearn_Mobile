@@ -6,6 +6,7 @@ import 'package:edulearn_mobile/feature/auth/domain/entity/register_entity.dart'
 import 'package:edulearn_mobile/feature/auth/domain/params/log_in_params.dart';
 import 'package:edulearn_mobile/feature/auth/domain/params/register_params.dart';
 
+import '../entity/genareted_otp_entity.dart';
 import '../entity/otp_entity.dart';
 import '../params/otp_params.dart';
 
@@ -16,10 +17,8 @@ abstract class AuthRepository {
   Future<Result<RegisterEntity>> registerTeacher({
     required RegisterParams registerTeacherParams,
   });
-  Future<Result<OtpEntity>> confirmEmail({
-    required OtpParams otpParams,
-  });
-  Future<void> resendOtp({required String email});
+  Future<Result<OtpEntity>> confirmEmail({required OtpParams otpParams});
+  Future<Result<GenaretedOtpEntity>> resendOtp({required String email});
 
   Future<Result<AuthTokenEntity>> login({required LoginParams loginModel});
   Future<void> forgotPassword({required String email});
