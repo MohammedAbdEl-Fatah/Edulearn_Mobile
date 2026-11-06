@@ -1,4 +1,5 @@
 class AuthEndPiontApi {
+  AuthEndPiontApi._();
   static const String login = '/auth/login';
   static const String signUpStudent = '/auth/sign-up/student';
   static const String signUpTeacher = '/auth/sign-up/teacher';
@@ -7,4 +8,9 @@ class AuthEndPiontApi {
   static const String refreshToken = '/auth/refresh-token';
   static const String resendOtp = '/auth/generated-otp';
   static const String forgotPassword = '/auth/forget-password';
+}
+
+class UserEndPoint {
+  UserEndPoint._();
+  static const String profileUser = "/user/profile";
 }
