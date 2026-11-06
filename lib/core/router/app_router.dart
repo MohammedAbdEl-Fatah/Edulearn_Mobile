@@ -10,6 +10,7 @@ import '../../feature/auth/presentation/view/reset_password_screen.dart';
 import '../../feature/auth/presentation/view/select_role_register.dart';
 import '../../feature/auth/presentation/view/student_register.dart';
 import '../../feature/auth/presentation/view/teacher_register.dart';
+import '../../feature/home/presentation/view/home_screen.dart';
 part 'router_name.dart';
 
 class AppRouter {
@@ -61,6 +62,12 @@ class AppRouter {
           settings: setting,
         );
 
+      ///home screen
+      case RouterName.home:
+        return MaterialPageRoute(
+          builder: (_) => const HomeScreen(),
+          settings: setting,
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(

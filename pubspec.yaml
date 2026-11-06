@@ -28,6 +28,7 @@ dependencies:
   #Dependency Injection
   get_it: ^9.3.0
   pin_code_fields: ^9.5.1
+  flutter_animate: ^4.5.2
 
 # 2.4.17+ of the Android plugin requires AGP 8.13.1 / Kotlin 2.3.0.
 # Pin to a version that builds with this project's AGP 8.11 toolchain.
