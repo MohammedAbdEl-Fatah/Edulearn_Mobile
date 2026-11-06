@@ -21,7 +21,7 @@ class LogInCubit extends Cubit<LogInState> {
       final secureStorage = SecureStorage();
       await secureStorage.saveAuthToken(token.accessToken);
       await secureStorage.saveRefreshToken(token.refreshToken);
-      emit(SuccessState(token: token));
+      emit(SuccessState(token: token)); 
     });
   }
 }

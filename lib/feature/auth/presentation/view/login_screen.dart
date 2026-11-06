@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/di/injection_container.dart';
 import '../../../../core/widgets/button.dart';
 import '../../../../core/widgets/text_button.dart';
+import '../../../user/presentation/cubit/user_cubit.dart';
 import '../../domain/params/log_in_params.dart';
 import '../widget/custom_text_form_field.dart';
 
@@ -83,7 +84,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     alignment: .centerEnd,
                     child: CustomTextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, RouterName.forgotPasswordScreen);
+                        Navigator.pushNamed(
+                          context,
+                          RouterName.forgotPasswordScreen,
+                        );
                       },
                       title: "Forgot password?",
                     ),
@@ -95,6 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   BlocConsumer<LogInCubit, LogInState>(
                     listener: (context, state) {
                       if (state is SuccessState) {
+                        context.read<UserCubit>().getUser();
                         // 1.5sec waitting
                         Future.delayed(const Duration(milliseconds: 1500), () {
                           if (context.mounted) {

@@ -71,7 +71,9 @@ class ForgotPasswordScreen extends StatelessWidget {
                               vertical: 12,
                             ),
                             decoration: BoxDecoration(
-                              color: AppColors.successDefault.withOpacity(0.1),
+                              color: AppColors.successDefault.withValues(
+                                alpha: 0.1,
+                              ),
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
                                 color: AppColors.successDefault,
@@ -101,7 +103,9 @@ class ForgotPasswordScreen extends StatelessWidget {
                               vertical: 12,
                             ),
                             decoration: BoxDecoration(
-                              color: AppColors.errorDefault.withOpacity(0.1),
+                              color: AppColors.errorDefault.withValues(
+                                alpha: 0.1,
+                              ),
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
                                 color: AppColors.errorDefault,

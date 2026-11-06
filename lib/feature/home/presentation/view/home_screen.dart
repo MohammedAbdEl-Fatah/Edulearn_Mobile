@@ -1,13 +1,28 @@
+import 'dart:developer';
+
 import 'package:edulearn_mobile/core/theme/app_style.dart';
 import 'package:edulearn_mobile/core/widgets/logo.dart';
 import 'package:edulearn_mobile/core/widgets/text_button.dart';
+import 'package:edulearn_mobile/feature/user/presentation/cubit/user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widget/custom_datails_course_item.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<UserCubit>().getUser();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +37,37 @@ class HomeScreen extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
-              child: const Text("Good morning, Mohammed", style: AppStyle.h1)
-                  .animate()
-                  .fadeIn(duration: 600.ms)
-                  .slideY(
-                    begin: 0.2,
-                    end: 0,
-                    duration: 600.ms,
-                    curve: Curves.easeOut,
-                  ),
+              child: BlocBuilder<UserCubit, UserState>(
+                builder: (context, state) {
+                  String userName = "";
+                  if (state is SuccessUserState) {
+                    userName = state.userEntity.fullName;
+                    log(userName);
+                  }
+                  return Text(
+                        "Good morning, ${userName.split(" ")[0]} ☀️",
+                        style: AppStyle.h2,
+                      )
+                      .animate()
+                      .fadeIn(duration: 600.ms)
+                      .slideY(
+                        begin: 0.2,
+                        end: 0,
+                        duration: 600.ms,
+                        curve: Curves.easeOut,
+                      );
+                },
+              ),
             ),
-
+            SliverToBoxAdapter(
+              child: Row(
+                children: [
+                  const Text("Continue learning", style: AppStyle.h3Bold),
+                  const Spacer(),
+                  CustomTextButton(onPressed: () {}, title: "view all"),
+                ],
+              ),
+            ),
             SliverToBoxAdapter(
               child: SizedBox(
                 height: 120,

@@ -34,6 +34,7 @@ class ApiService {
     required String path,
     Object? data,
     Map<String, dynamic>? query,
+    Options? options,
     CancelToken? cancelToken,
     T Function(dynamic json)? parser,
   }) => _request<T>(
@@ -41,6 +42,7 @@ class ApiService {
     path,
     data: data,
     query: query,
+    options: options,
     cancelToken: cancelToken,
     parser: parser,
   );

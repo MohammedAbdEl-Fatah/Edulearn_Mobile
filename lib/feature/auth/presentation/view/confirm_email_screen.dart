@@ -152,8 +152,8 @@ class _ConfirmEmailScreenState extends State<ConfirmEmailScreen> {
                         ),
                         decoration: BoxDecoration(
                           color: isSuccess
-                              ? AppColors.successDefault.withOpacity(0.1)
-                              : AppColors.errorDefault.withOpacity(0.1),
+                              ? AppColors.successDefault.withValues(alpha: 0.1)
+                              : AppColors.errorDefault.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
                             color: isSuccess

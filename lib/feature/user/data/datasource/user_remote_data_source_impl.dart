@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:edulearn_mobile/core/network/api_service.dart';
 import 'package:edulearn_mobile/core/network/end_piont_api.dart';
 import 'package:edulearn_mobile/feature/user/data/datasource/user_remote_data_source.dart';
@@ -16,10 +17,13 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     final SecureStorage secureStorage = SecureStorage();
     return _apiService.get(
       path: UserEndPoint.profileUser,
-      query: {
-        "Authorization": "student ${await secureStorage.getRefreshToken()}",
-        "accesstoken": "student ${await secureStorage.getAuthToken()}",
-      },
+      options: Options(
+        headers: {
+          "Authorization": "teacher ${await secureStorage.getRefreshToken()}",
+          "accesstoken": "teacher ${await secureStorage.getAuthToken()}",
+        },
+      ),
+      parser: (json) => UserModel.fromJson(json),
     );
   }
 }

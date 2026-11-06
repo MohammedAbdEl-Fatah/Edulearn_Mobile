@@ -34,7 +34,8 @@ class _SplashScreenState extends State<SplashScreen>
               KeySharedPreferences.isWatch.name,
             ) ??
             false) {
-          Navigator.pushNamed(context, RouterName.home);
+          //todo check islogin
+          Navigator.pushNamed(context, RouterName.login);
         } else {
           Navigator.pushNamed(context, RouterName.onbording);
         }
