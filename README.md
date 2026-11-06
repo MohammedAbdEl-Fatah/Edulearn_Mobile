@@ -304,10 +304,9 @@ sl.registerLazySingleton(() => AuthRepositoryImpl(remoteDataSource: sl()));
 
 For questions, support, or contributions:
 
-- **Developer**: [Your Name]
-- **Email**: [Your Email]
-- **GitHub**: [Your GitHub Profile]
-- **Project Repository**: [Repository URL]
+- **Developer**: Mohammed Mohammed Abd Elfatah
+- **Email**: mohammedabdelfatah837@gmail.com
+- **GitHub**: (https://github.com/MohammedAbdEl-Fatah)
 
 ---
 
