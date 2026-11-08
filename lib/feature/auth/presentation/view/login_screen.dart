@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           if (context.mounted) {
                             Navigator.pushNamedAndRemoveUntil(
                               context,
-                              RouterName.home,
+                              RouterName.layout,
                               (route) => false,
                             );
                           }

@@ -11,6 +11,7 @@ import '../../feature/auth/presentation/view/select_role_register.dart';
 import '../../feature/auth/presentation/view/student_register.dart';
 import '../../feature/auth/presentation/view/teacher_register.dart';
 import '../../feature/home/presentation/view/home_screen.dart';
+import '../../feature/layout/presentation/view/layout_screen.dart';
 part 'router_name.dart';
 
 class AppRouter {
@@ -66,6 +67,11 @@ class AppRouter {
       case RouterName.home:
         return MaterialPageRoute(
           builder: (_) => const HomeScreen(),
+          settings: setting,
+        );
+      case RouterName.layout:
+        return MaterialPageRoute(
+          builder: (_) => const LayoutScreen(),
           settings: setting,
         );
       default:

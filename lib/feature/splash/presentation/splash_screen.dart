@@ -35,7 +35,14 @@ class _SplashScreenState extends State<SplashScreen>
             ) ??
             false) {
           //todo check islogin
-          Navigator.pushNamed(context, RouterName.login);
+          if (StorageSharedPreferences.storage.get<bool>(
+                KeySharedPreferences.isLogin.name,
+              ) ??
+              false) {
+            Navigator.pushNamed(context, RouterName.layout);
+          } else {
+            Navigator.pushNamed(context, RouterName.login);
+          }
         } else {
           Navigator.pushNamed(context, RouterName.onbording);
         }

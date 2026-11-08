@@ -14,4 +14,5 @@ class RouterName {
   static const String confirmEmail = "confirmEmail";
   static const String forgotPasswordScreen = "forgetPassword";
   static const String resetPassword = "resetPassword";
+  static const String layout = "layout";
 }
