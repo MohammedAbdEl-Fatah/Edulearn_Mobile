@@ -1,11 +1,14 @@
+import "package:dio/dio.dart";
 import "package:edulearn_mobile/core/errors/result.dart";
 import "package:edulearn_mobile/core/network/api_service.dart";
 import "package:edulearn_mobile/core/network/end_piont_api.dart";
 import "package:edulearn_mobile/feature/auth/data/model/forgot_password_model.dart";
 import "package:edulearn_mobile/feature/auth/data/model/genareted_otp_model.dart";
 import "package:edulearn_mobile/feature/auth/data/model/otp_model.dart";
+import "package:edulearn_mobile/feature/auth/data/model/refresh_token_model.dart";
 import "package:edulearn_mobile/feature/auth/data/model/request/register_student_request_model.dart";
 import "package:edulearn_mobile/feature/auth/data/model/response/register_student_response_model.dart";
+import "../../../../core/storage/secure_storage.dart";
 import "auth_remote_data_source.dart";
 import "../model/request/log_in_request_model.dart";
 import "../model/response/log_in_response_model.dart";
@@ -86,6 +89,22 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       data: {"otp": otp, "email": email, "newPassword": password},
       parser: (json) =>
           ForgotPasswordModel.fromJson(json as Map<String, dynamic>),
+    );
+  }
+
+  @override
+  Future<Result<RefreshTokenModel>> refreshToken({required String role}) async {
+    final secureStorage = SecureStorage();
+    return _apiService.post(
+      path: AuthEndPiontApi.refreshToken,
+      options: Options(
+        headers: {
+          "Authorization": "$role ${await secureStorage.getRefreshToken()}",
+          "accesstoken": "$role ${await secureStorage.getAuthToken()}",
+        },
+      ),
+      parser: (json) =>
+          RefreshTokenModel.fromJson(json as Map<String, dynamic>),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/di/injection_container.dart';
+import 'feature/auth/presentation/cubit/auth/auth_cubit.dart';
 import 'feature/user/presentation/cubit/user_cubit.dart';
 
 class EdulearnApp extends StatelessWidget {
@@ -12,7 +13,10 @@ class EdulearnApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => sl<UserCubit>())],
+      providers: [
+        BlocProvider(create: (context) => sl<UserCubit>()),
+        BlocProvider(create: (context) => sl<AuthCubit>()..checkAuthState()),
+      ],
       child: MaterialApp(
         title: 'Edulearn',
         debugShowCheckedModeBanner: false,

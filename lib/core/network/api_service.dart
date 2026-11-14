@@ -53,11 +53,13 @@ class ApiService {
     Object? data,
     Map<String, dynamic>? query,
     CancelToken? cancelToken,
+    Options? options,
     T Function(dynamic json)? parser,
   }) => _request(
     "POST",
     path,
     data: data,
+    options: options,
     cancelToken: cancelToken,
     query: query,
     parser: parser,

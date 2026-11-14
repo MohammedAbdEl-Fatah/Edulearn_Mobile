@@ -1,14 +1,13 @@
 import 'package:edulearn_mobile/core/errors/result.dart';
 import 'package:edulearn_mobile/feature/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:edulearn_mobile/feature/auth/data/model/request/register_student_request_model.dart';
-
 import 'package:edulearn_mobile/feature/auth/domain/entity/auth_token_entity.dart';
 import 'package:edulearn_mobile/feature/auth/domain/entity/otp_entity.dart';
-
 import 'package:edulearn_mobile/feature/auth/domain/params/log_in_params.dart';
 
 import '../../domain/entity/forgot_password_entity.dart';
 import '../../domain/entity/genareted_otp_entity.dart';
+import '../../domain/entity/refresh_token_entity.dart';
 import '../../domain/entity/register_entity.dart';
 import '../../domain/params/forgot_password_params.dart';
 import '../../domain/params/otp_params.dart';
@@ -68,9 +67,17 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<void> refreshToken() {
-    // TODO: implement refreshToken
-    throw UnimplementedError();
+  Future<Result<RefreshTokenEntity>> refreshToken({required String role}) async {
+    final result = await _authRemoteDataSource.refreshToken(role: role);
+    return result.fold(
+      (failure) => Failed<RefreshTokenEntity>(failure),
+      (success) => Success<RefreshTokenEntity>(
+        RefreshTokenEntity(
+          accessToken: success.accessToken,
+          refreshToken: success.refreshToken,
+        ),
+      ),
+    );
   }
 
   @override
