@@ -2,6 +2,7 @@ part of 'app_router.dart';
 
 class RouterName {
   RouterName._();
+  static const String authGate = "authGate";
   static const String splashScreen = "splashScreen";
   static const String onbording = "onbording";
   static const String auth = "auth";

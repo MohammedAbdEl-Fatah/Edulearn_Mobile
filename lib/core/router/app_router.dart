@@ -1,4 +1,5 @@
 import 'package:edulearn_mobile/core/theme/app_style.dart';
+import 'package:edulearn_mobile/feature/auth/presentation/view/auth_gate.dart';
 import 'package:edulearn_mobile/feature/auth/presentation/view/confirm_email_screen.dart';
 import 'package:edulearn_mobile/feature/auth/presentation/view/login_screen.dart';
 import 'package:edulearn_mobile/feature/onbording/presentation/view/onbording_screen.dart';
@@ -18,6 +19,8 @@ class AppRouter {
   AppRouter._();
   static Route<MaterialPageRoute> generateRoute(RouteSettings setting) {
     switch (setting.name) {
+      case RouterName.authGate:
+        return MaterialPageRoute(builder: (_) => const AuthGate());
       case RouterName.splashScreen:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case RouterName.onbording:
