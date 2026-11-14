@@ -20,8 +20,13 @@ class LogInCubit extends Cubit<LogInState> {
       token,
     ) async {
       final secureStorage = SecureStorage();
-      await secureStorage.saveAuthToken(token.accessToken);
-      await secureStorage.saveRefreshToken(token.refreshToken);
+      await secureStorage.savingInformationUser(
+        accessToken: token.accessToken,
+        refToken: token.refreshToken,
+        idUser: token.userId.toString(),
+        role: token.role.toString(),
+      );
+     
       await StorageSharedPreferences.storage.set<bool>(
         key: KeySharedPreferences.isLogin.name,
         value: true,
