@@ -7,6 +7,10 @@ class UserModel extends UserEntity {
     required super.email,
     required super.dob,
     required super.role,
+    required super.firstName,
+    required super.lastName,
+    required super.about,
+    required super.stats,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -17,6 +21,12 @@ class UserModel extends UserEntity {
       email: data['email'],
       dob: data['dob'],
       role: data['role'],
+      firstName: data['firstName'],
+      lastName: data['lastName'],
+      about: data['about'],
+      stats: StatsUserInfo(
+        courseCount: data['stats']['coursesCount'].toString(),
+      ),
     );
   }
 }
