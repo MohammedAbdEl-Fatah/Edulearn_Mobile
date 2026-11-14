@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:edulearn_mobile/core/router/app_router.dart';
 import 'package:edulearn_mobile/core/theme/app_colors.dart';
 import 'package:edulearn_mobile/core/theme/app_images.dart';
@@ -24,30 +26,28 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     init();
-    //check if device see onborading skip it,
-    //check user if login or not.
-
     Future.delayed(const Duration(milliseconds: 4000), () {
       if (mounted) {
-        //check is watch onbording or not
-        if (StorageSharedPreferences.storage.get<bool>(
-              KeySharedPreferences.isWatch.name,
-            ) ??
-            false) {
-          //todo check islogin
-          if (StorageSharedPreferences.storage.get<bool>(
-                KeySharedPreferences.isLogin.name,
-              ) ??
-              false) {
-            Navigator.pushNamed(context, RouterName.layout);
-          } else {
-            Navigator.pushNamed(context, RouterName.login);
-          }
-        } else {
-          Navigator.pushNamed(context, RouterName.onbording);
-        }
+        checkAppStart(context);
       }
     });
+  }
+
+  Future<void> checkAppStart(BuildContext context) async {
+    final isWatch =
+        StorageSharedPreferences.storage.get<bool>(
+          KeySharedPreferences.isWatch.name,
+        ) ??
+        false;
+    log(isWatch.toString());
+    if (!context.mounted) return;
+
+    if (!isWatch) {
+      await Navigator.pushReplacementNamed(context, RouterName.onbording);
+      return;
+    }
+
+    await Navigator.pushReplacementNamed(context, RouterName.authGate);
   }
 
   void init() async {
