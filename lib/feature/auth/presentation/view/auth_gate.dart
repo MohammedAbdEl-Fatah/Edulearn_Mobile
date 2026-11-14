@@ -1,7 +1,7 @@
+import 'package:edulearn_mobile/feature/layout/presentation/view/layout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../home/presentation/view/home_screen.dart';
 import '../cubit/auth/auth_cubit.dart';
 import '../cubit/auth/auth_state.dart';
 import 'login_screen.dart';
@@ -20,7 +20,7 @@ class AuthGate extends StatelessWidget {
               body: Center(child: CircularProgressIndicator()),
             );
           case AuthStatus.authenticated:
-            return const HomeScreen();
+            return const LayoutScreen();
 
           case AuthStatus.unauthenticated:
             return const LoginScreen();
