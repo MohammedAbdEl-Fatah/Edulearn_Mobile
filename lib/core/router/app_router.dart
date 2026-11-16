@@ -13,6 +13,7 @@ import '../../feature/auth/presentation/view/student_register.dart';
 import '../../feature/auth/presentation/view/teacher_register.dart';
 import '../../feature/home/presentation/view/home_screen.dart';
 import '../../feature/layout/presentation/view/layout_screen.dart';
+import '../../feature/profile/presentation/view/edit_profile_screen.dart';
 part 'router_name.dart';
 
 class AppRouter {
@@ -63,6 +64,11 @@ class AppRouter {
       case RouterName.resetPassword:
         return MaterialPageRoute(
           builder: (_) => const ResetPasswordScreen(),
+          settings: setting,
+        );
+      case RouterName.editProfile:
+        return MaterialPageRoute(
+          builder: (_) => const EditProfileScreen(),
           settings: setting,
         );
 

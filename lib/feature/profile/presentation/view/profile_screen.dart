@@ -1,3 +1,4 @@
+import 'package:edulearn_mobile/core/router/app_router.dart';
 import 'package:edulearn_mobile/core/theme/app_colors.dart';
 import 'package:edulearn_mobile/core/theme/extension.dart';
 import 'package:flutter/material.dart';
@@ -139,21 +140,28 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 SizedBox(height: context.h(16)),
                 //card column => edit profile / notifacation / logout
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Card(
                     color: AppColors.backGroundWhite,
                     child: Column(
                       children: [
                         IteamProfile(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              RouterName.editProfile,
+                              arguments: userModel
+                            );
+                          },
                           title: "Edit Profile",
                           icon: Icons.person_3_outlined,
                         ),
-                        IteamProfile(
+                        const IteamProfile(
                           title: "Notification",
                           icon: Icons.notifications_active,
                         ),
-                        IteamProfile(title: "Logout", icon: Icons.logout),
+                        const IteamProfile(title: "Logout", icon: Icons.logout),
                       ],
                     ),
                   ),
