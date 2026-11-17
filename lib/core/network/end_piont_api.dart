@@ -13,4 +13,5 @@ class AuthEndPiontApi {
 class UserEndPoint {
   UserEndPoint._();
   static const String profileUser = "/user/profile";
+  static const String editProfile = "/user/edit-profile";
 }
