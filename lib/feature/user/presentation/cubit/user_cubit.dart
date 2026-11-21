@@ -8,7 +8,9 @@ class UserCubit extends Cubit<UserState> {
   UserCubit(super.initialState, this.useCase);
   final UserUseCase useCase;
   Future<void> getUser() async {
-    emit(LoadingUserState());
+    if (state is! SuccessUserState) {
+      emit(LoadingUserState());
+    }
     await useCase.call().then((value) {
       value.fold(
         (failure) {

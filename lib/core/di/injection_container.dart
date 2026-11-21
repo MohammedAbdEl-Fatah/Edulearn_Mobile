@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 
 import '../../feature/auth/auth_injection.dart';
+import '../../feature/profile/profile_injection.dart';
 import '../../feature/user/user_injection.dart';
 import '../config/app_config.dart';
 import '../network/api_service.dart';
@@ -16,6 +17,7 @@ Future<void> setupDependencies() async {
 
   setupAuthDependencies();
   setupUserDependencies();
+  setupProfileDependencies();
 }
 
 //common injection for all features

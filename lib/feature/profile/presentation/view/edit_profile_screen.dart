@@ -2,10 +2,16 @@ import 'package:edulearn_mobile/core/theme/app_colors.dart';
 import 'package:edulearn_mobile/core/theme/app_style.dart';
 import 'package:edulearn_mobile/core/theme/extension.dart';
 import 'package:edulearn_mobile/core/widgets/text_button.dart';
+import 'package:edulearn_mobile/feature/profile/presentation/cubit/edit_profile_cubit.dart';
 import 'package:edulearn_mobile/feature/user/data/model/user_model.dart';
+import 'package:edulearn_mobile/feature/user/presentation/cubit/user_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/di/injection_container.dart';
 import '../../../../core/widgets/button.dart';
+import '../../domain/params/edit_profile_params.dart';
+import '../widget/item_card_text_field.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -77,10 +83,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
   }
 
-  void _saveChanges() {
-    // TODO: Implement save logic (e.g., API call to update user profile)
-    // For now, just show a dialog or navigate back
-    Navigator.pop(context);
+  Future<void> _saveChanges(
+    BuildContext cubitContext, {
+    required EditProfileParams params,
+  }) {
+    return cubitContext.read<EditProfileCubit>().editProfile(params: params);
   }
 
   void _cancelChanges() {
@@ -108,105 +115,92 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     final UserModel userModel =
         ModalRoute.of(context)!.settings.arguments as UserModel;
 
-    return Scaffold(
-      appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 24),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: .center,
-            children: [
-              //Avater image
-              CircleAvatar(
-                radius: 32,
-                backgroundColor: AppColors.primaryLight,
-                child: Text(
-                  userModel.firstName[0] + userModel.lastName[0].toUpperCase(),
-                  style: AppStyle.h2SemiBold.copyWith(
-                    color: AppColors.primaryDefault,
-                  ),
-                ),
-              ),
-              //Text button => change picture
-              CustomTextButton(title: "change picture", onPressed: () {}),
-
-              //field =>{full name , about ,age , phone, dob}
-              ItemCardTextFeild(
-                text: "Full Name",
-                role: userModel.role,
-                controller: fullNameController,
-              ),
-              ItemCardTextFeild(text: "Email", controller: emailController),
-              ItemCardTextFeild(text: "About", controller: aboutController),
-              ItemCardTextFeild(text: "Phone", controller: phoneController),
-              //button change save
-              SizedBox(height: context.h(32)),
-              Row(
+    return BlocProvider(
+      create: (context) => sl<EditProfileCubit>(),
+      child: BlocListener<EditProfileCubit, EditProfileState>(
+        listener: (context, state) {
+          if (state is SuccessEditProfileState) {
+            context.read<UserCubit>().getUser();//change data in user cubit
+            Navigator.pop(context);
+          }
+        },
+        child: Scaffold(
+          appBar: AppBar(),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 24),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: .center,
                 children: [
-                  Expanded(
-                    child: Button(
-                      title: "Cancel",
-                      onPressed: hasChanges ? _cancelChanges : null,
+                  CircleAvatar(
+                    radius: 32,
+                    backgroundColor: AppColors.primaryLight,
+                    child: Text(
+                      userModel.firstName[0] +
+                          userModel.lastName[0].toUpperCase(),
+                      style: AppStyle.h2SemiBold.copyWith(
+                        color: AppColors.primaryDefault,
+                      ),
                     ),
                   ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Button(
-                      title: "Save",
-                      onPressed: hasChanges ? _saveChanges : null,
-                    ),
+                  CustomTextButton(title: "change picture", onPressed: () {}),
+                  ItemCardTextFeild(
+                    text: "Full Name",
+                    role: userModel.role,
+                    controller: fullNameController,
+                  ),
+                  ItemCardTextFeild(text: "Email", controller: emailController),
+                  ItemCardTextFeild(text: "About", controller: aboutController),
+                  ItemCardTextFeild(text: "Phone", controller: phoneController),
+                  SizedBox(height: context.h(32)),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Button(
+                          title: "Cancel",
+                          onPressed: hasChanges ? _cancelChanges : null,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: BlocBuilder<EditProfileCubit, EditProfileState>(
+                          builder: (context, state) {
+                            if (state is LoadingEditProfileState) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            return Button(
+                              title: "Save",
+                              onPressed: hasChanges
+                                  ? () {
+                                      final names = fullNameController.text
+                                          .trim()
+                                          .split(' ');
+                                      _saveChanges(
+                                        context,
+                                        params: EditProfileParams(
+                                          firstName: names.first,
+                                          lastName: names.length > 1
+                                              ? names.sublist(1).join(' ')
+                                              : '',
+                                          phone: phoneController.text,
+                                          about: aboutController.text,
+                                        ),
+                                      );
+                                    }
+                                  : null,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class ItemCardTextFeild extends StatelessWidget {
-  const ItemCardTextFeild({
-    super.key,
-    required this.controller,
-    required this.text,
-    this.role,
-  });
-  final String? role;
-  final String text;
-  final TextEditingController controller;
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 0.1,
-      color: AppColors.backGroundWhite,
-
-      child: Column(
-        crossAxisAlignment: .start,
-        children: [
-          Row(
-            children: [
-              Text(text, style: AppStyle.bodyBold),
-              if (role != null)
-                Text(
-                  "\t - \t${role?[0].toUpperCase()}${role?.substring(1)}",
-                  style: AppStyle.bodyBold,
-                ),
-            ],
-          ),
-          TextField(
-            controller: controller,
-            decoration: const InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: AppColors.backGround),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: AppColors.backGround),
-              ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
