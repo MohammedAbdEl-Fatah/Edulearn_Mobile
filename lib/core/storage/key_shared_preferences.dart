@@ -1,1 +1,1 @@
-enum KeySharedPreferences { isWatch, isLogin }
+enum KeySharedPreferences { isWatch, }
