@@ -4,6 +4,7 @@ import 'package:edulearn_mobile/feature/auth/data/model/response/register_studen
 
 import '../model/forgot_password_model.dart';
 import '../model/genareted_otp_model.dart';
+import '../model/logout_model.dart';
 import '../model/otp_model.dart';
 import '../model/refresh_token_model.dart';
 import '../model/request/log_in_request_model.dart';
@@ -30,4 +31,5 @@ abstract class AuthRemoteDataSource {
     required String password,
   });
   Future<Result<RefreshTokenModel>> refreshToken({required String role});
+  Future<Result<LogoutModel>> logout();
 }

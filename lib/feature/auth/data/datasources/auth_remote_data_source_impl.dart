@@ -4,6 +4,7 @@ import "package:edulearn_mobile/core/network/api_service.dart";
 import "package:edulearn_mobile/core/network/end_piont_api.dart";
 import "package:edulearn_mobile/feature/auth/data/model/forgot_password_model.dart";
 import "package:edulearn_mobile/feature/auth/data/model/genareted_otp_model.dart";
+import "package:edulearn_mobile/feature/auth/data/model/logout_model.dart";
 import "package:edulearn_mobile/feature/auth/data/model/otp_model.dart";
 import "package:edulearn_mobile/feature/auth/data/model/refresh_token_model.dart";
 import "package:edulearn_mobile/feature/auth/data/model/request/register_student_request_model.dart";
@@ -105,6 +106,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       ),
       parser: (json) =>
           RefreshTokenModel.fromJson(json as Map<String, dynamic>),
+    );
+  }
+
+  @override
+  Future<Result<LogoutModel>> logout() {
+    return _apiService.patch<LogoutModel>(
+      path: AuthEndPiontApi.logout,
+      parser: (json) => LogoutModel.fromJson(json as Map<String, dynamic>),
     );
   }
 }

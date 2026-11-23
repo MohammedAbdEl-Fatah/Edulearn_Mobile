@@ -3,9 +3,7 @@ import 'package:edulearn_mobile/feature/auth/domain/params/log_in_params.dart';
 import 'package:edulearn_mobile/feature/auth/domain/usecases/log_in_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/storage/key_shared_preferences.dart';
 import '../../../../../core/storage/secure_storage.dart';
-import '../../../../../core/storage/storage_shared_preferences.dart';
 
 part 'log_in_state.dart';
 
@@ -27,10 +25,6 @@ class LogInCubit extends Cubit<LogInState> {
         role: token.role.toString(),
       );
      
-      await StorageSharedPreferences.storage.set<bool>(
-        key: KeySharedPreferences.isLogin.name,
-        value: true,
-      );
       emit(SuccessState(token: token));
     });
   }

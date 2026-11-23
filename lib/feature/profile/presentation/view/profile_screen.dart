@@ -1,6 +1,9 @@
+import 'package:edulearn_mobile/core/di/injection_container.dart';
 import 'package:edulearn_mobile/core/router/app_router.dart';
 import 'package:edulearn_mobile/core/theme/app_colors.dart';
 import 'package:edulearn_mobile/core/theme/extension.dart';
+import 'package:edulearn_mobile/feature/auth/presentation/cubit/auth/auth_cubit.dart';
+import 'package:edulearn_mobile/feature/auth/presentation/cubit/logout/logout_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,7 +21,20 @@ class ProfileScreen extends StatelessWidget {
     final userModel = userState is SuccessUserState
         ? userState.userEntity
         : null;
-    return Scaffold(
+    return BlocProvider(
+      create: (_) => sl<LogoutCubit>(),
+      child: BlocListener<LogoutCubit, LogoutState>(
+        listener: (context, state) {
+          if (state is LogoutSuccess) {
+            context.read<AuthCubit>().sessionExpired();
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              RouterName.login,
+              (route) => false,
+            );
+          }
+        },
+        child: Scaffold(
       appBar: AppBar(
         title: Row(
           spacing: 9,
@@ -161,7 +177,17 @@ class ProfileScreen extends StatelessWidget {
                           title: "Notification",
                           icon: Icons.notifications_active,
                         ),
-                        const IteamProfile(title: "Logout", icon: Icons.logout),
+                        BlocBuilder<LogoutCubit, LogoutState>(
+                          builder: (context, state) {
+                            return IteamProfile(
+                              title: "Logout",
+                              icon: Icons.logout,
+                              onTap: state is LogoutLoading
+                                  ? null
+                                  : () => context.read<LogoutCubit>().logout(),
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -174,6 +200,8 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ],
             ),
+        ),
+      ),
     );
   }
 }

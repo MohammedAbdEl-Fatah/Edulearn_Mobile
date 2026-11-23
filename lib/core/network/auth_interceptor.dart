@@ -17,6 +17,9 @@ class AuthInterceptor extends Interceptor {
   bool _isRefreshCall(RequestOptions o) =>
       o.path.endsWith(AuthEndPiontApi.refreshToken);
 
+  bool _isLogoutCall(RequestOptions o) =>
+      o.path.endsWith(AuthEndPiontApi.logout);
+
   @override
   Future<void> onRequest(
     RequestOptions options,
@@ -50,7 +53,10 @@ class AuthInterceptor extends Interceptor {
 
     final alreadyRetried = err.requestOptions.extra['retried'] == true;
 
-    if (!isExpired || alreadyRetried || _isRefreshCall(err.requestOptions)) {
+    if (!isExpired ||
+        alreadyRetried ||
+        _isRefreshCall(err.requestOptions) ||
+        _isLogoutCall(err.requestOptions)) {
       return handler.next(err);
     }
 

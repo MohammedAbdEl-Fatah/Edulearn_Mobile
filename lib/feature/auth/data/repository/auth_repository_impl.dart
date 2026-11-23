@@ -7,6 +7,7 @@ import 'package:edulearn_mobile/feature/auth/domain/params/log_in_params.dart';
 
 import '../../domain/entity/forgot_password_entity.dart';
 import '../../domain/entity/genareted_otp_entity.dart';
+import '../../domain/entity/logout_entity.dart';
 import '../../domain/entity/refresh_token_entity.dart';
 import '../../domain/entity/register_entity.dart';
 import '../../domain/params/forgot_password_params.dart';
@@ -61,9 +62,12 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<void> logout() {
-    // TODO: implement logout
-    throw UnimplementedError();
+  Future<Result<LogoutEntity>> logout() async {
+    final result = await _authRemoteDataSource.logout();
+    return result.fold(
+      (failure) => Failed<LogoutEntity>(failure),
+      (success) => Success<LogoutEntity>(success),
+    );
   }
 
   @override

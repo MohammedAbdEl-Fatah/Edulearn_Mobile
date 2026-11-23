@@ -13,12 +13,14 @@ import 'data/datasources/auth_remote_data_source_impl.dart';
 import 'data/repository/auth_repository_impl.dart';
 import 'domain/repository/auth_repository.dart';
 import 'domain/usecases/log_in_use_case.dart';
+import 'domain/usecases/logout_use_case.dart';
 import 'domain/usecases/refreh_token_use_case.dart';
 import 'domain/usecases/register_teacher_use_case.dart';
 import 'domain/usecases/resend_otp_use_case.dart';
 import 'presentation/cubit/auth/auth_cubit.dart';
 import 'presentation/cubit/confirm_email/confirm_email_cubit.dart';
 import 'presentation/cubit/log_in/log_in_cubit.dart';
+import 'presentation/cubit/logout/logout_cubit.dart';
 import 'presentation/cubit/register_student/register_student_cubit.dart';
 import 'presentation/cubit/register_teacher/register_teacher_cubit.dart';
 
@@ -65,8 +67,12 @@ void setupAuthDependencies() {
   );
   //does't use
   sl.registerLazySingleton(() => RefrehTokenUseCase(sl<AuthRepository>()));
+  sl.registerLazySingleton(
+    () => LogoutUseCase(repository: sl<AuthRepository>()),
+  );
   // Cubits
   sl.registerFactory(() => LogInCubit(sl<LogInUseCase>()));
+  sl.registerFactory(() => LogoutCubit(sl<LogoutUseCase>()));
   sl.registerFactory(() => RegisterStudentCubit(sl<RegisterStudentUseCase>()));
   sl.registerFactory(() => RegisterTeacherCubit(sl<RegisterTeacherUseCase>()));
   sl.registerFactory(() => ConfirmEmailCubit(sl<ConfirmEmailUseCase>()));
