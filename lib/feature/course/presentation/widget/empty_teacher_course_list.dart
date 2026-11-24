@@ -5,8 +5,8 @@ import "package:flutter/material.dart";
 
 import "../../../../core/theme/app_colors.dart";
 
-class EmptyCourseList extends StatelessWidget {
-  const EmptyCourseList({super.key});
+class EmptyTeacherCourseList extends StatelessWidget {
+  const EmptyTeacherCourseList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class EmptyCourseList extends StatelessWidget {
             style: AppStyle.caption.copyWith(color: AppColors.textGray),
             textAlign: .center,
           ),
-          SizedBox(height: context.h(32)),  
+          SizedBox(height: context.h(32)),
           Button(
             title: "Create your first course",
             onPressed: () {
