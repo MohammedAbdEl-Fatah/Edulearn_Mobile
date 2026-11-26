@@ -3,6 +3,7 @@ import "package:edulearn_mobile/core/theme/extension.dart";
 import "package:edulearn_mobile/core/widgets/button.dart";
 import "package:flutter/material.dart";
 
+import "../../../../core/router/app_router.dart";
 import "../../../../core/theme/app_colors.dart";
 
 class EmptyTeacherCourseList extends StatelessWidget {
@@ -49,7 +50,7 @@ class EmptyTeacherCourseList extends StatelessWidget {
           Button(
             title: "Create your first course",
             onPressed: () {
-              //navigate to create course
+              Navigator.pushNamed(context, RouterName.createCourse);
             },
           ),
         ],

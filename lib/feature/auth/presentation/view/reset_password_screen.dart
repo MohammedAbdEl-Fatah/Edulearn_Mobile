@@ -5,7 +5,7 @@ import 'package:edulearn_mobile/core/theme/extension.dart';
 import 'package:edulearn_mobile/core/widgets/button.dart';
 import 'package:edulearn_mobile/feature/auth/domain/validation_field.dart';
 import 'package:edulearn_mobile/feature/auth/presentation/widget/custom_icon_label.dart';
-import 'package:edulearn_mobile/feature/auth/presentation/widget/custom_text_form_field.dart';
+import 'package:edulearn_mobile/core/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

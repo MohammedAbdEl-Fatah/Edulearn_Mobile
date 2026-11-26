@@ -13,7 +13,7 @@ import '../../../../core/widgets/text_button.dart';
 import '../../domain/params/register_params.dart';
 import '../cubit/register_teacher/register_teacher_cubit.dart';
 import '../widget/custom_change_role.dart';
-import '../widget/custom_text_form_field.dart';
+import '../../../../core/widgets/custom_text_form_field.dart';
 import '../widget/dob_field.dart';
 
 class TeacherRegister extends StatefulWidget {

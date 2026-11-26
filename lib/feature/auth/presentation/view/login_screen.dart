@@ -13,7 +13,7 @@ import '../../../../core/widgets/button.dart';
 import '../../../../core/widgets/text_button.dart';
 import '../../../user/presentation/cubit/user_cubit.dart';
 import '../../domain/params/log_in_params.dart';
-import '../widget/custom_text_form_field.dart';
+import '../../../../core/widgets/custom_text_form_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
