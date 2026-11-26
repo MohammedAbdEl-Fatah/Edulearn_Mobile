@@ -49,7 +49,7 @@ class EmptyTeacherCourseList extends StatelessWidget {
           Button(
             title: "Create your first course",
             onPressed: () {
-              //todo implement logic
+              //navigate to create course
             },
           ),
         ],
