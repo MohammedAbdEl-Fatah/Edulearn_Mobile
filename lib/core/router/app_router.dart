@@ -11,6 +11,7 @@ import '../../feature/auth/presentation/view/reset_password_screen.dart';
 import '../../feature/auth/presentation/view/select_role_register.dart';
 import '../../feature/auth/presentation/view/student_register.dart';
 import '../../feature/auth/presentation/view/teacher_register.dart';
+import '../../feature/course/presentation/view/create_course.dart';
 import '../../feature/home/presentation/view/home_screen.dart';
 import '../../feature/layout/presentation/view/layout_screen.dart';
 import '../../feature/profile/presentation/view/edit_profile_screen.dart';
@@ -69,6 +70,11 @@ class AppRouter {
       case RouterName.editProfile:
         return MaterialPageRoute(
           builder: (_) => const EditProfileScreen(),
+          settings: setting,
+        );
+      case RouterName.createCourse:
+        return MaterialPageRoute(
+          builder: (_) => const CreateCourse(),
           settings: setting,
         );
 

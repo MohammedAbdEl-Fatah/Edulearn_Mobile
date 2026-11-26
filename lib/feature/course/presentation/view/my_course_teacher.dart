@@ -1,6 +1,7 @@
 import 'package:edulearn_mobile/feature/course/presentation/widget/empty_teacher_course_list.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/router/app_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../widget/custom_app_bar_course.dart';
 
@@ -19,7 +20,7 @@ class MyCourseTeacher extends StatelessWidget {
         ),
         shape: const CircleBorder(),
         onPressed: () {
-          // navigate to create course
+          Navigator.pushNamed(context, RouterName.createCourse);
         },
         child: const Icon(Icons.add, color: AppColors.backGroundWhite),
       ),
